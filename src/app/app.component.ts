@@ -93,14 +93,8 @@ export class AppComponent {
   }
 
   submit(f) {
-    // console.log('Submitting new data...');
-    // console.log(f.value);
-    this.addTask(f.value.id, f.value.title, f.value.order);
+    this.addTask(f.value.id, f.value.title, f.value.priority);
     f.resetForm();
-    //console.log(f);
-    //f.id = "newId";
-    //f.title = "newTitle";
-    //f.order = "newOrder";
     this.toggleEditing();
   }
 
@@ -141,15 +135,14 @@ export class AppComponent {
     return result;
   }
 
-  private addTask(id: string, title: string, order: number) {
-    // console.log('Adding: ' + id + ', ' + title + ', ' + order);
-    if (order < 0) {
-      order = 0;
+  private addTask(id: string, title: string, priority: number) {
+    if (priority < 0) {
+      priority = 0;
     }
-    else if (order > this.tasks.length) {
-      order = this.tasks.length;
+    else if (priority > this.tasks.length) {
+      priority = this.tasks.length;
     }
 
-    this.tasks.splice(order, 0, new Task(order, id, title));
+    this.tasks.splice(priority, 0, new Task(priority, id, title));
   }
 }

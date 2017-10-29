@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Task } from '../task.model';
 import { WorkingInterval } from '../working-interval.model';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,6 +12,7 @@ import { WorkingInterval } from '../working-interval.model';
 export class AppComponent {
   tasks: Task[];
   runningTask: Task = null;
+  editing: boolean = false;
 
   constructor() {
     this.tasks = [
@@ -67,6 +70,48 @@ export class AppComponent {
     }
   }
 
+  edit(taskId) {
+    var index = this.findTaskIndex(taskId);
+
+    if ((index >= 0) && (index < this.tasks.length)) {
+      this.startEditing();
+
+      // TO DO: Rest of logic.
+    }
+  }
+
+  delete(taskId) {
+    var index = this.findTaskIndex(taskId);
+
+    if ((index >= 0) && (index < this.tasks.length)) {
+      this.tasks.splice(index, 1);
+    }
+  }
+
+  saveData() {
+    console.log('Saving data...');
+  }
+
+  submit(f) {
+    // console.log('Submitting new data...');
+    // console.log(f.value);
+    this.addTask(f.value.id, f.value.title, f.value.order);
+    f.resetForm();
+    //console.log(f);
+    //f.id = "newId";
+    //f.title = "newTitle";
+    //f.order = "newOrder";
+    this.toggleEditing();
+  }
+
+  toggleEditing() {
+    this.editing = !this.editing;
+  }
+
+  startEditing() {
+    this.editing = true;
+  }
+
   private findTask(taskId): Task {
     var foundIndex = -1;
     for (var i = 0; i < this.tasks.length; i++) {
@@ -94,5 +139,17 @@ export class AppComponent {
     }
 
     return result;
+  }
+
+  private addTask(id: string, title: string, order: number) {
+    // console.log('Adding: ' + id + ', ' + title + ', ' + order);
+    if (order < 0) {
+      order = 0;
+    }
+    else if (order > this.tasks.length) {
+      order = this.tasks.length;
+    }
+
+    this.tasks.splice(order, 0, new Task(order, id, title));
   }
 }

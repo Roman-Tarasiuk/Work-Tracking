@@ -13,6 +13,8 @@ export class TaskItemComponent implements OnInit {
   @Output() onTaskStopped: EventEmitter<string> = new EventEmitter();
   @Output() onTaskMovedUp: EventEmitter<string> = new EventEmitter();
   @Output() onTaskMovedDown: EventEmitter<string> = new EventEmitter();
+  @Output() onTaskEdit: EventEmitter<string> = new EventEmitter();
+  @Output() onTaskDelete: EventEmitter<string> = new EventEmitter();
 
   isActive: boolean = false;
 
@@ -44,6 +46,16 @@ export class TaskItemComponent implements OnInit {
   moveDown(event) {
     this.onTaskMovedDown.emit(this.task.id);
     event.stopPropagation();
+  }
+
+  edit (event) {
+      this.onTaskEdit.emit(this.task.id);
+      event.stopPropagation();
+  }
+
+  delete (event) {
+      this.onTaskDelete.emit(this.task.id);
+      event.stopPropagation();
   }
 
   // #region Helper Methods

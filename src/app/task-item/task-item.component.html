@@ -15,7 +15,13 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-4 h3">{{task.id}}</div>
-    <div class="col-sm-8"><div class="vertical-align">Time spent: {{totalTime()}}</div></div>
+    <div class="col-sm-3 h3">{{task.id}}</div>
+    <div class="col-sm-6">
+      <div class="vertical-align">Time spent: {{totalTime()}}</div>
+    </div>
+    <div class="col-sm-3">
+        <button disabled (click)="edit($event)" class="btn btn-xs vertical-align btn-edit">Edit</button>
+        <button (click)="delete($event)" class="btn btn-xs vertical-align btn-delete">Delete</button>  
+    </div>
   </div>
 </div>

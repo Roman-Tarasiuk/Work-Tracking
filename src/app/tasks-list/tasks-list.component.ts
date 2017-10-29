@@ -15,6 +15,8 @@ export class TasksListComponent implements OnInit {
   @Output() onTaskStopped: EventEmitter<string> = new EventEmitter();
   @Output() onTaskMovedUp: EventEmitter<string> = new EventEmitter();
   @Output() onTaskMovedDown: EventEmitter<string> = new EventEmitter();
+  @Output() onTaskEdit: EventEmitter<string> = new EventEmitter();
+  @Output() onTaskDelete: EventEmitter<string> = new EventEmitter();
 
   constructor() {
   }
@@ -43,5 +45,13 @@ export class TasksListComponent implements OnInit {
 
   moveDown(id) {
     this.onTaskMovedDown.emit(id);
+  }
+
+  edit (id) {
+      this.onTaskEdit.emit(id);
+  }
+
+  delete (id) {
+      this.onTaskDelete.emit(id);
   }
 }

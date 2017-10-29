@@ -1,10 +1,43 @@
 <div class="container">
-  <h1>Work Tracking <span class="badge">Helper tool for Jira</span></h1>
+  <h1>Work Tracking <span class="badge">Helper tool for Jira ®</span></h1>
 
   <app-tasks-list [tasks]="tasks"
       (onTaskStarted)="taskStarted($event)"
       (onTaskStopped)="taskStopped($event)"
       (onTaskMovedUp)="moveUp($event)"
-      (onTaskMovedDown)="moveDown($event)">
+      (onTaskMovedDown)="moveDown($event)"
+      (onTaskEdit)="edit($event)"
+      (onTaskDelete)="delete($event)">
   </app-tasks-list>
+
+  <button class="btn btn-success"
+    [ngClass]="{'edit-new-task': editing}"
+    (click)="toggleEditing()">New Task</button>
+
+  <button class="btn btn-primary"
+    [ngClass]="{'edit-new-task': editing}"
+    (click)="saveData()">Save Work</button>
+
+  <form #f="ngForm" class="new-task-form" [ngClass]="{'edit-new-task': !editing}">
+      <h3>New Task:</h3>
+
+      <div class="form-group">
+        <label for="id">ID</label>
+        <input type="text" class="form-control" id="id" name="id" required ngModel>
+      </div>
+
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" name="title" required ngModel>
+      </div>
+
+      <div class="form-group">
+        <label for="order">Order</label>
+        <input type="text" class="form-control" id="order" name="order" required ngModel>
+      </div>
+  
+      <!--type="submit"-->
+      <button class="btn btn-success" (click)="submit(f)">Submit</button>
+      <button class="btn btn-success" (click)="toggleEditing()">Cancel</button>
+  </form>
 </div>

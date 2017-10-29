@@ -14,27 +14,36 @@ export class TaskItemComponent implements OnInit {
   @Output() onTaskMovedUp: EventEmitter<string> = new EventEmitter();
   @Output() onTaskMovedDown: EventEmitter<string> = new EventEmitter();
 
+  isActive: boolean = false;
+
   constructor() {
   }
 
   ngOnInit() {
   }
 
-  toggle() {
+  toggle(event) {
       if (!this.task.taskStarted) {
         this.onTaskStarted.emit(this.task.id);
       }
       else {
         this.onTaskStopped.emit(this.task.id);
       }
+      event.stopPropagation();
   }
 
-  moveUp() {
+  toggleActive() {
+      this.isActive = !this.isActive;
+  }
+
+  moveUp(event) {
     this.onTaskMovedUp.emit(this.task.id);
+    event.stopPropagation();
   }
 
-  moveDown() {
+  moveDown(event) {
     this.onTaskMovedDown.emit(this.task.id);
+    event.stopPropagation();
   }
 
   // #region Helper Methods

@@ -1,16 +1,17 @@
-<div class="task-item">
+<div class="task-item" [ngClass]="{'task-item-active': isActive}"
+    (click)="toggleActive()">
   <div class="row">
     <div class="col-sm-9">
       <h2>{{task.title}}</h2>
     </div>
     <div class="col-sm-3 buttons">
-        <button (click)='toggle()'
+        <button (click)='toggle($event)'
             class="btn btn-primary vertical-align"
             [ngClass]="{'btn-warning': task.taskStarted, 'btn-success': !task.taskStarted}">
             {{task.taskStarted ? 'Stop' : 'Start'}}
         </button>
-        <button (click)="moveUp()" class="btn btn-xs vertical-align"><span class="glyphicon glyphicon-arrow-up"></span></button>
-        <button (click)="moveDown()" class="btn btn-xs vertical-align"><span class="glyphicon glyphicon-arrow-down"></span></button>  
+        <button (click)="moveUp($event)" class="btn btn-xs vertical-align"><span class="glyphicon glyphicon-arrow-up"></span></button>
+        <button (click)="moveDown($event)" class="btn btn-xs vertical-align"><span class="glyphicon glyphicon-arrow-down"></span></button>  
     </div>
   </div>
   <div class="row">

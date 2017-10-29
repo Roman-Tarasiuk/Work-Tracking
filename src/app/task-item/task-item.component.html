@@ -1,10 +1,20 @@
 <div class="task-item">
-  <h2>{{task.title}}</h2>
   <div class="row">
-    <div class="col-sm-2 h3">{{task.id}}</div>
-    <div class="col-sm-8"><div class="vertical-align">Time spent: {{totalTime()}}</div></div>
-    <div class="col-sm-2">
-      <button class="btn btn-primary">Start</button>
+    <div class="col-sm-9">
+      <h2>{{task.title}}</h2>
     </div>
+    <div class="col-sm-3 buttons">
+        <button (click)='toggle()'
+            class="btn btn-primary vertical-align"
+            [ngClass]="{'btn-warning': task.taskStarted, 'btn-success': !task.taskStarted}">
+            {{task.taskStarted ? 'Stop' : 'Start'}}
+        </button>
+        <button (click)="moveUp()" class="btn btn-xs vertical-align"><span class="glyphicon glyphicon-arrow-up"></span></button>
+        <button (click)="moveDown()" class="btn btn-xs vertical-align"><span class="glyphicon glyphicon-arrow-down"></span></button>  
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4 h3">{{task.id}}</div>
+    <div class="col-sm-8"><div class="vertical-align">Time spent: {{totalTime()}}</div></div>
   </div>
 </div>

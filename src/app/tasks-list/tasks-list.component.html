@@ -1,3 +1,8 @@
 <p *ngFor="let task of sordedByOrder()">
-  <app-task-item [task]="task"></app-task-item>
+  <app-task-item [task]="task"
+      (onTaskStarted)="taskStarted($event)"
+      (onTaskStopped)="taskStopped($event)"
+      (onTaskMovedUp)="moveUp($event)"
+      (onTaskMovedDown)="moveDown($event)">
+  </app-task-item>
 </p>

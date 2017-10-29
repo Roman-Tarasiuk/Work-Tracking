@@ -1,5 +1,10 @@
 <div class="container">
-  <h1>Work Tracking <span class="badge">New</span></h1>
+  <h1>Work Tracking <span class="badge">Helper tool for Jira</span></h1>
 
-  <app-tasks-list></app-tasks-list>
+  <app-tasks-list [tasks]="tasks"
+      (onTaskStarted)="taskStarted($event)"
+      (onTaskStopped)="taskStopped($event)"
+      (onTaskMovedUp)="moveUp($event)"
+      (onTaskMovedDown)="moveDown($event)">
+  </app-tasks-list>
 </div>

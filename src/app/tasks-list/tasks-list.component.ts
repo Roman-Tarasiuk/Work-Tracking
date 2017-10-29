@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { TaskItemComponent } from '../task-item/task-item.component';
 import { Task } from '../../task.model';
 import { WorkingInterval } from '../../working-interval.model';
@@ -9,28 +9,39 @@ import { WorkingInterval } from '../../working-interval.model';
   styleUrls: ['./tasks-list.component.css']
 })
 export class TasksListComponent implements OnInit {
-  tasks: Task[];
+  @Input() tasks: Task[];
+
+  @Output() onTaskStarted: EventEmitter<string> = new EventEmitter();
+  @Output() onTaskStopped: EventEmitter<string> = new EventEmitter();
+  @Output() onTaskMovedUp: EventEmitter<string> = new EventEmitter();
+  @Output() onTaskMovedDown: EventEmitter<string> = new EventEmitter();
 
   constructor() {
-    this.tasks = [
-      new Task(4, 'id-123', 'Home'),
-      new Task(2, 'id-123', 'TRM'),
-      new Task(3, 'QAT-3456', 'TM'),
-      new Task(1, 'BMRS-9876', 'BM')
-    ]
-
-    this.tasks[0].workTime.push(new WorkingInterval(
-      new Date(2017, 9, 28, 10, 15),
-      new Date())
-    );
   }
 
   sordedByOrder(): Task[] {
-    var copy = this.tasks.slice(0, this.tasks.length);
-    return copy.sort((a: Task, b: Task) => a.order - b.order);
+    // var copy = this.tasks.slice(0, this.tasks.length);
+    // return copy.sort((a: Task, b: Task) => a.order - b.order);
+
+    return this.tasks.sort((a: Task, b: Task) => a.priority - b.priority);
   }
 
   ngOnInit() {
   }
 
+  taskStarted(id) {
+    this.onTaskStarted.emit(id);
+  }
+
+  taskStopped(id) {
+    this.onTaskStopped.emit(id);
+  }
+
+  moveUp(id) {
+    this.onTaskMovedUp.emit(id);
+  }
+
+  moveDown(id) {
+    this.onTaskMovedDown.emit(id);
+  }
 }

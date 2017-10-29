@@ -1,13 +1,14 @@
 import { WorkingInterval } from './working-interval.model';
 
 export class Task {
-    order: number;
+    priority: number;
     id: string;
     title: string;
     workTime: WorkingInterval[];
-
-    constructor(order: number, id: string, title: string) {
-        this.order = order;
+    taskStarted: boolean = false;
+        
+    constructor(priority: number, id: string, title: string) {
+        this.priority = priority;
         this.id = id;
         this.title = title;
         this.workTime = new Array<WorkingInterval>();
@@ -15,10 +16,12 @@ export class Task {
 
     startWork(d: Date) {
         this.workTime.push(new WorkingInterval(d, null));
+        this.taskStarted = true;
     }
 
     endWork (d: Date) {
-        var length = this.workTime.length;
-        this.workTime[length - 1].end = d;
+        var len = this.workTime.length;
+        this.workTime[len - 1].end = d;
+        this.taskStarted = false;
     }
 }

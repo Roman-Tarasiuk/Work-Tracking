@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+.task-item {
+    border: 1px solid #ccc;
+    padding: 0px 5px ;
+}
+
+.task-item h2 {
+    color: darkslateblue;
+    padding-left: 10px;
+}
+
+.vertical-align {
+    margin-top: 25px;
+}

@@ -1,0 +1,75 @@
+YOU DON’T KNOW JS
+ ■ Up & Going
+ ■ Scope & Closures
+ ■ this & Object Prototypes
+ ■ Types & Grammar
+ ■ Async & Performance
+ ■ ES6 & Beyond
+
+localStorage.setItem('myCat', 'Tom');
+localStorage.getItem('myCat');
+localStorage.removeItem('myCat');
+JSON.stringify(work)
+JSON.parse(w);
+
+Element.prototype.removeChildren = function() {
+    while (this.firstChild) {
+        this.removeChild(this.firstChild);
+    }
+}
+
+document.createElement('div');
+document.createTextNode('blah');
+element.appendChild(child);
+element.classList.add('theWork');
+
+
+ng new Work-Tracking
+
+    >> installing ng
+    >>   create .editorconfig
+    >>   create README.md
+    >>   create src\app\app.component.css
+    >>   create src\app\app.component.html
+    >>   create src\app\app.component.spec.ts
+    >>   create src\app\app.component.ts
+    >>   create src\app\app.module.ts
+    >>   create src\assets\.gitkeep
+    >>   create src\environments\environment.prod.ts
+    >>   create src\environments\environment.ts
+    >>   create src\favicon.ico
+    >>   create src\index.html
+    >>   create src\main.ts
+    >>   create src\polyfills.ts
+    >>   create src\styles.css
+    >>   create src\test.ts
+    >>   create src\tsconfig.app.json
+    >>   create src\tsconfig.spec.json
+    >>   create src\typings.d.ts
+    >>   create .angular-cli.json
+    >>   create e2e\app.e2e-spec.ts
+    >>   create e2e\app.po.ts
+    >>   create e2e\tsconfig.e2e.json
+    >>   create .gitignore
+    >>   create karma.conf.js
+    >>   create package.json
+    >>   create protractor.conf.js
+    >>   create tsconfig.json
+    >>   create tslint.json
+    >> Installing packages for tooling via npm.
+    >> Installed packages for tooling via npm.
+    >> Successfully initialized git.
+    >> Project 'Work-Tracking' successfully created.
+    165 MB
+    22 789 Files, 3 094 Folders
+    Git: "chore: initial commit from @angular/cli"
+
+ng serve
+
+see F:\Desktop2\GitHub\Work-Tracking\src\app\app.component.html
+ initial page
+
+styles.css are included in F:\Desktop2\GitHub\Work-Tracking\.angular-cli.json
+"../node_modules/bootstrap/dist/css/bootstrap.min.css" too
+– pay attention to path
+

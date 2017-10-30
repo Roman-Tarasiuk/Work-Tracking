@@ -60,7 +60,7 @@ export class TaskItemComponent implements OnInit {
 
   // #region Helper Methods
 
-  private totalTime(): string {
+  totalTime(): string {
     var workTime = this.task.workTime;
     var total: number = 0;
 

@@ -6,20 +6,27 @@
     </div>
     <div class="col-sm-3 buttons">
         <button (click)='toggle($event)'
-            class="btn btn-primary vertical-align"
+            class="btn btn-primary vertical-align1"
             [ngClass]="{'btn-warning': task.taskStarted, 'btn-success': !task.taskStarted}">
             {{task.taskStarted ? 'Stop' : 'Start'}}
         </button>
-        <button (click)="moveUp($event)" class="btn btn-xs vertical-align"><span class="glyphicon glyphicon-arrow-up"></span></button>
-        <button (click)="moveDown($event)" class="btn btn-xs vertical-align"><span class="glyphicon glyphicon-arrow-down"></span></button>  
+        <button (click)="moveUp($event)" class="btn btn-xs vertical-align1"><span class="glyphicon glyphicon-arrow-up"></span></button>
+        <button (click)="moveDown($event)" class="btn btn-xs vertical-align1"><span class="glyphicon glyphicon-arrow-down"></span></button>  
     </div>
   </div>
   <div class="row">
     <div class="col-sm-3 h3">{{task.id}}</div>
     <div class="col-sm-6">
-      <div class="vertical-align">Time spent: {{totalTime()}}</div>
+      <div class="vertical-align2">
+        <span class="span-time-spent">Time spent:</span>
+        <br>
+        <span class="span-timer-desc">Total</span> <span class="span-timer">{{totalTime()}}</span>
+        <span class="span-timer-desc">This week</span> <span class="span-timer">{{totalTimeWeek()}}</span>
+        <span class="span-timer-desc">Today</span> <span class="span-timer">{{totalTimeToday()}}</span>
+        <span class="span-timer-desc" *ngIf="task.taskStarted">+ {{timer}}</span>
+      </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-3 vertical-align3">
         <button disabled (click)="edit($event)" class="btn btn-xs vertical-align btn-edit">Edit</button>
         <button (click)="delete($event)" class="btn btn-xs vertical-align btn-delete">Delete</button>  
     </div>

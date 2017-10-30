@@ -16,16 +16,8 @@ export class AppComponent {
 
   constructor() {
     this.tasks = [
-      new Task(4, 'id-123', 'Home'),
-      new Task(2, 'id-100500', 'TRM'),
-      new Task(3, 'QAT-3456', 'TM'),
-      new Task(1, 'BMRS-9876', 'BM')
+      new Task(4, 'id-0', 'Idle Time')
     ]
-
-    this.tasks[0].workTime.push(new WorkingInterval(
-      new Date(2017, 9, 28, 10, 15),
-      new Date())
-    );
   }
 
   taskStarted(taskId) {
@@ -89,7 +81,11 @@ export class AppComponent {
   }
 
   saveData() {
-    console.log('Saving data...');
+    this.uploadWorkToStorage(this.tasks);
+  }
+
+  loadData() {
+    this.tasks = this.getWorkFromStorage();
   }
 
   submit(f) {
@@ -144,5 +140,41 @@ export class AppComponent {
     }
 
     this.tasks.splice(priority, 0, new Task(priority, id, title));
+  }
+
+  private uploadWorkToStorage(work) {
+    localStorage.setItem('work',  JSON.stringify(work));
+  }
+
+  private getWorkFromStorage () {
+      var wStr = localStorage.getItem('work');
+
+      if (wStr == undefined || wStr == null) {
+          console.log('getWorkFromStorage(): no data loaded.');
+          return null;
+      }
+
+      var tmp: Task[] = JSON.parse(wStr);
+      
+      for (var i = 0; i < tmp.length; i++) {
+        var timespans = tmp[i].workTime;
+
+        for (var j = 0; j < timespans.length; j++) {
+          if (timespans[j].start) {
+            timespans[j].start = new Date(timespans[j].start);
+          }
+          if (timespans[j].end) {
+            timespans[j].end = new Date(timespans[j].end);
+          }
+        }
+      }
+
+      var result: Task[] = new Array<Task>();
+
+      for (var i = 0; i < tmp.length; i++) {
+        result.push(new Task(tmp[i].priority, tmp[i].id, tmp[i].title, tmp[i].workTime));
+      }
+
+      return result;
   }
 }

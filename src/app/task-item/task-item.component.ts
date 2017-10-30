@@ -18,6 +18,10 @@ export class TaskItemComponent implements OnInit {
 
   isActive: boolean = false;
 
+  intervalId: number;
+  timer: string;
+  startTime: Date;
+
   constructor() {
   }
 
@@ -26,9 +30,11 @@ export class TaskItemComponent implements OnInit {
 
   toggle(event) {
       if (!this.task.taskStarted) {
+        this.startTimer();
         this.onTaskStarted.emit(this.task.id);
       }
       else {
+        this.stopTimer();
         this.onTaskStopped.emit(this.task.id);
       }
       event.stopPropagation();
@@ -58,8 +64,6 @@ export class TaskItemComponent implements OnInit {
       event.stopPropagation();
   }
 
-  // #region Helper Methods
-
   totalTime(): string {
     var workTime = this.task.workTime;
     var total: number = 0;
@@ -72,6 +76,45 @@ export class TaskItemComponent implements OnInit {
 
     return this.timeStr(total);
   }
+
+  totalTimeWeek() {
+    var curr = new Date(); // get current date
+    var first = curr.getDate() - curr.getDay() + 1; // First day is the day of the month - the day of the week
+    var last = first + 6; // last day is the first day + 6
+
+    var firstday = new Date();
+    firstday.setDate(first);
+    firstday.setHours(0, 0, 0, 0);
+
+    var workTime = this.task.workTime;
+    var total: number = 0;
+
+    for (var i = 0; i < workTime.length; i++) {
+      if ((workTime[i].end != null) && (workTime[i].start >= firstday)) {
+        total += Math.abs(new Date(workTime[i].end).getTime() - new Date(workTime[i].start).getTime());
+      }
+    }
+
+    return this.timeStr(total);
+  }
+
+  totalTimeToday() {
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+ 
+    var workTime = this.task.workTime;
+    var total: number = 0;
+
+    for (var i = 0; i < workTime.length; i++) {
+      if ((workTime[i].end != null) && (workTime[i].start >= today)) {
+        total += Math.abs(new Date(workTime[i].end).getTime() - new Date(workTime[i].start).getTime());
+      }
+    }
+
+    return this.timeStr(total);
+  }
+
+  // #region Helper Methods
 
   private timeStr(total): string {
     var oneDay = 1000 * 3600 * 24;
@@ -95,7 +138,32 @@ export class TaskItemComponent implements OnInit {
     var oneSecond = 1000;
     var totalSeconds = Math.floor(total / oneSecond);
 
-    return totalDays + 'd ' + totalHours + 'h ' + totalMinutes + 'm ' + totalSeconds + 's';
+    return (totalDays > 0 ? (totalDays + 'd ') : '')
+        + (totalHours > 0 ? (totalHours + 'h ') : '')
+        + (totalMinutes > 0 ? (totalMinutes + 'm ') : '')
+        + totalSeconds + 's';
+  }
+
+//    timer() {
+//        if (!this.task.taskStarted) {
+//            return '';
+//        }
+//        else {
+//
+//        }
+//    }
+
+  startTimer() {
+    this.startTime = new Date();
+
+    this.intervalId = window.setInterval(() => {
+        this.timer = this.timeStr(new Date().getTime() - this.startTime.getTime());
+    }, 1000);
+  }
+
+  stopTimer() {
+    window.clearInterval(this.intervalId);
+    this.timer = '';
   }
 
 // #endregion

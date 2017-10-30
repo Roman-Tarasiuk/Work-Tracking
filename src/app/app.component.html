@@ -17,6 +17,10 @@
   <button class="btn btn-primary"
     [ngClass]="{'edit-new-task': editing}"
     (click)="saveData()">Save Work</button>
+  
+  <button class="btn btn-warning"
+    [ngClass]="{'edit-new-task': editing}"
+    (click)="loadData()">Load Work</button>
 
   <form #f="ngForm" class="new-task-form" [ngClass]="{'edit-new-task': !editing}">
       <h3>New Task:</h3>

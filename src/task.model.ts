@@ -7,11 +7,16 @@ export class Task {
     workTime: WorkingInterval[];
     taskStarted: boolean = false;
         
-    constructor(priority: number, id: string, title: string) {
+    constructor(priority: number, id: string, title: string, workTime?: WorkingInterval[]) {
         this.priority = priority;
         this.id = id;
         this.title = title;
-        this.workTime = new Array<WorkingInterval>();
+        if (workTime) {
+            this.workTime = workTime;
+        }
+        else {
+            this.workTime = new Array<WorkingInterval>();
+        }
     }
 
     startWork(d: Date) {

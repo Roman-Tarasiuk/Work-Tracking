@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 .task-item {
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     padding: 0px 5px ;
 }
 
@@ -13,8 +13,16 @@
     padding-left: 10px;
 }
 
-.vertical-align {
-    margin-top: 25px;
+.vertical-align1 {
+    margin-top: 12px;
+}
+
+.vertical-align2 {
+    margin-top: 2px;
+}
+
+.vertical-align3 {
+    margin-top: 27px;
 }
 
 .buttons {
@@ -38,4 +46,27 @@
 
 .edit-new-task {
     display: none !important;
+}
+
+.span-timer, .span-timer-desc {
+    color: #fff;
+    background-color: #5cb85c;
+    padding: 4px;
+    margin-right: 0;
+    border-radius: 3px;
+}
+
+.span-timer-desc {
+    margin-left: 10px;
+}
+
+.span-timer {
+    margin-left: 0;
+    font-weight: bold;
+}
+
+.span-time-spent {
+    display: inline-block;
+    margin-left: 5px;
+    margin-bottom: 6px;
 }

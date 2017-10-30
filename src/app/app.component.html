@@ -1,9 +1,13 @@
 <div class="container">
   <h1>Work Tracking <span class="badge">Helper tool for Jira ®</span></h1>
 
+  <div class="alert alert-danger" style="margin-top: 5px;" role="alert" *ngIf="runningTask == null">
+      All tasks stopped!
+  </div>
+
   <app-tasks-list [tasks]="tasks"
-      (onTaskStarted)="taskStarted($event)"
-      (onTaskStopped)="taskStopped($event)"
+      (onTaskStarted)="startTask($event)"
+      (onTaskStopped)="stopTasks()"
       (onTaskMovedUp)="moveUp($event)"
       (onTaskMovedDown)="moveDown($event)"
       (onTaskEdit)="edit($event)"
@@ -44,4 +48,8 @@
       <button class="btn btn-success" (click)="submit(f)">Submit</button>
       <button class="btn btn-success" (click)="toggleEditing()">Cancel</button>
   </form>
+
+  <div class="alert alert-danger" style="margin-top: 5px;" role="alert" *ngIf="runningTask == null">
+      All tasks stopped!
+  </div>
 </div>

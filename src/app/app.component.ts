@@ -20,7 +20,7 @@ export class AppComponent {
     ]
   }
 
-  taskStarted(taskId) {
+  startTask(taskId) {
     for (var i = 0; i < this.tasks.length; i++) {
       if (this.tasks[i].id == taskId) {
         if (this.runningTask != null) {
@@ -33,7 +33,7 @@ export class AppComponent {
     }
   }
 
-  taskStopped(taskId) {
+  stopTasks() {
     if (this.runningTask != null) {
       this.runningTask.endWork(new Date());
       this.runningTask = null;
@@ -81,10 +81,21 @@ export class AppComponent {
   }
 
   saveData() {
+    if (this.runningTask != null) {
+      var tmp = this.runningTask;
+    }
+
+    this.stopTasks();
     this.uploadWorkToStorage(this.tasks);
+
+    if (tmp != null) {
+      this.runningTask = tmp;
+      this.runningTask.startWork(new Date());
+    }
   }
 
   loadData() {
+    this.stopTasks();
     this.tasks = this.getWorkFromStorage();
   }
 

@@ -29,7 +29,7 @@ export class TaskItemComponent implements OnInit {
   }
 
   toggle(event) {
-      if (!this.task.taskStarted) {
+      if (!this.task.started) {
         this.startTimer();
         this.onTaskStarted.emit(this.task.id);
       }

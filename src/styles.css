@@ -5,7 +5,11 @@
 }
 
 .task-item-active {
-    background-color: #eee;
+    background-color: #ccc;
+}
+
+.task-item-running {
+    background-color: #c2e2b6;
 }
 
 .task-item h2 {
@@ -25,7 +29,7 @@
     margin-top: 27px;
 }
 
-.buttons {
+.buttons-right {
     text-align: right;
 }
 
@@ -67,6 +71,5 @@
 
 .span-time-spent {
     display: inline-block;
-    margin-left: 5px;
     margin-bottom: 6px;
 }

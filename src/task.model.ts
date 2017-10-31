@@ -5,7 +5,7 @@ export class Task {
     id: string;
     title: string;
     workTime: WorkingInterval[];
-    taskStarted: boolean = false;
+    started: boolean = false;
         
     constructor(priority: number, id: string, title: string, workTime?: WorkingInterval[]) {
         this.priority = priority;
@@ -21,12 +21,12 @@ export class Task {
 
     startWork(d: Date) {
         this.workTime.push(new WorkingInterval(d, null));
-        this.taskStarted = true;
+        this.started = true;
     }
 
     endWork (d: Date) {
         var len = this.workTime.length;
         this.workTime[len - 1].end = d;
-        this.taskStarted = false;
+        this.started = false;
     }
 }

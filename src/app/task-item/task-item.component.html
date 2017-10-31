@@ -1,34 +1,48 @@
-<div class="task-item" [ngClass]="{'task-item-active': isActive}"
+<div class="container task-item"
+    [ngClass]="{'task-item-active': isActive, 'task-item-running': task.started}"
     (click)="toggleActive()">
   <div class="row">
     <div class="col-sm-9">
       <h2>{{task.title}}</h2>
     </div>
-    <div class="col-sm-3 buttons">
-        <button (click)='toggle($event)'
-            class="btn btn-primary vertical-align1"
-            [ngClass]="{'btn-warning': task.taskStarted, 'btn-success': !task.taskStarted}">
-            {{task.taskStarted ? 'Stop' : 'Start'}}
-        </button>
-        <button (click)="moveUp($event)" class="btn btn-xs vertical-align1"><span class="glyphicon glyphicon-arrow-up"></span></button>
-        <button (click)="moveDown($event)" class="btn btn-xs vertical-align1"><span class="glyphicon glyphicon-arrow-down"></span></button>  
+    <div class="col-sm-3">
+      <div class="row">
+        <div class="col-sm-6">
+          <button disabled (click)="edit($event)" class="btn btn-xs vertical-align1 btn-edit">Edit</button>
+          <button (click)="delete($event)" class="btn btn-xs vertical-align1 btn-delete">Delete</button>  
+        </div>
+        <div class="col-sm-6 buttons-right">
+          <button (click)='toggle($event)'
+              class="btn btn-primary vertical-align1"
+              [ngClass]="{'btn-warning': task.started, 'btn-success': !task.started}">
+              {{task.started ? 'Stop' : 'Start'}}
+          </button>
+          <button (click)="moveUp($event)" class="btn btn-xs vertical-align1"><span class="glyphicon glyphicon-arrow-up"></span></button>
+          <button (click)="moveDown($event)" class="btn btn-xs vertical-align1"><span class="glyphicon glyphicon-arrow-down"></span></button>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-3 h3">{{task.id}}</div>
-    <div class="col-sm-6">
-      <div class="vertical-align2">
+    <div class="col-sm-9">
+      <div *ngIf="isActive || task.started">
         <span class="span-time-spent">Time spent:</span>
-        <br>
-        <span class="span-timer-desc">Total</span> <span class="span-timer">{{totalTime()}}</span>
-        <span class="span-timer-desc">This week</span> <span class="span-timer">{{totalTimeWeek()}}</span>
-        <span class="span-timer-desc">Today</span> <span class="span-timer">{{totalTimeToday()}}</span>
-        <span class="span-timer-desc" *ngIf="task.taskStarted">+ {{timer}}</span>
+        <div class="row">
+          <div class="col-sm-3">
+            <span class="span-timer-desc">Total</span> <span class="span-timer">{{totalTime()}}</span>
+          </div>
+          <div class="col-sm-3">
+            <span class="span-timer-desc">Week</span> <span class="span-timer">{{totalTimeWeek()}}</span>
+          </div>
+          <div class="col-sm-3">
+            <span class="span-timer-desc">Today</span> <span class="span-timer">{{totalTimeToday()}}</span>
+          </div>
+          <div class="col-sm-3">
+            <span class="span-timer-desc" *ngIf="task.started">+ {{timer}}</span>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="col-sm-3 vertical-align3">
-        <button disabled (click)="edit($event)" class="btn btn-xs vertical-align btn-edit">Edit</button>
-        <button (click)="delete($event)" class="btn btn-xs vertical-align btn-delete">Delete</button>  
     </div>
   </div>
 </div>

@@ -35,6 +35,7 @@ export class TaskItemComponent implements OnInit {
       }
       else {
         this.stopTimer();
+        this.isActive = false;
         this.onTaskStopped.emit(this.task.id);
       }
       event.stopPropagation();

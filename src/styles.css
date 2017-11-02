@@ -60,16 +60,8 @@
     border-radius: 3px;
 }
 
-.span-timer-desc {
-    margin-left: 10px;
-}
-
 .span-timer {
-    margin-left: 0;
+    margin-top: 4px;
     font-weight: bold;
-}
-
-.span-time-spent {
     display: inline-block;
-    margin-bottom: 6px;
 }

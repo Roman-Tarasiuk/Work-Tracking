@@ -1,4 +1,4 @@
-<div class="container task-item"
+<div class="task-item"
     [ngClass]="{'task-item-active': isActive, 'task-item-running': task.started}"
     (click)="toggleActive()">
   <div class="row">
@@ -27,19 +27,38 @@
     <div class="col-sm-3 h3">{{task.id}}</div>
     <div class="col-sm-9">
       <div *ngIf="isActive || task.started">
-        <span class="span-time-spent">Time spent:</span>
         <div class="row">
           <div class="col-sm-3">
-            <span class="span-timer-desc">Total</span> <span class="span-timer">{{totalTime()}}</span>
+            <div class="row">
+              <span class="span-timer-desc">Total time</span>
+            </div>
+            <div class="row">
+              <span class="span-timer">{{totalTime()}}</span>
+            </div>
           </div>
           <div class="col-sm-3">
-            <span class="span-timer-desc">Week</span> <span class="span-timer">{{totalTimeWeek()}}</span>
+            <div class="row">
+              <span class="span-timer-desc">This week</span>
+            </div>
+            <div class="row">
+              <span class="span-timer">{{totalTimeWeek()}}</span>
+            </div>
           </div>
           <div class="col-sm-3">
-            <span class="span-timer-desc">Today</span> <span class="span-timer">{{totalTimeToday()}}</span>
+            <div class="row">
+              <span class="span-timer-desc">Today</span>
+            </div>
+            <div class="row">
+              <span class="span-timer">{{totalTimeToday()}}</span>
+            </div>
           </div>
           <div class="col-sm-3">
-            <span class="span-timer-desc" *ngIf="task.started">+ {{timer}}</span>
+            <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+              <span class="span-timer" *ngIf="task.started">+ {{timer}}</span>
+            </div>
           </div>
         </div>
       </div>

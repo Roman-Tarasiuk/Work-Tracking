@@ -1,16 +1,16 @@
 <div class="container">
   <h1>Work Tracking <span class="badge">Helper tool for Jira ®</span></h1>
 
-  <div class="alert alert-warning" style="margin-top: 5px;" role="alert" *ngIf="runningTask == null">
+  <div class="alert alert-warning" style="margin-top: 5px;" role="alert" *ngIf="taskManager.runningTask == null">
       <span class="h4">All tasks stopped!</span>
   </div>
-  <div class="alert alert-success" style="margin-top: 5px;" role="alert" *ngIf="runningTask != null">
-      <span class="h4">Task <b>{{runningTask.id}}</b> is running now.</span>
+  <div class="alert alert-success" style="margin-top: 5px;" role="alert" *ngIf="taskManager.runningTask != null">
+      <span class="h4">Task <b>{{taskManager.runningTask.id}}</b> is running now.</span>
   </div>
 
   <app-tasks-list [tasks]="taskManager.tasks"
       (onTaskStarted)="taskManager.startTask($event)"
-      (onTaskStopped)="taskManager.stopRunningTask()"
+      (onTaskStopped)="taskManager.stopRunningTask(null)"
       (onTaskMovedUp)="taskManager.moveUp($event)"
       (onTaskMovedDown)="taskManager.moveDown($event)"
       (onTaskEdit)="taskManager.edit($event)"
@@ -18,19 +18,19 @@
   </app-tasks-list>
 
   <button class="btn btn-success"
-    [ngClass]="{'edit-new-task': editing}"
+    [ngClass]="{'edit-new-task': taskManager.editing}"
     (click)="taskManager.toggleEditing()">New Task</button>
 
   <button class="btn btn-primary"
-    [ngClass]="{'edit-new-task': editing}"
+    [ngClass]="{'edit-new-task': taskManager.editing}"
     (click)="taskManager.saveData()">Save Work</button>
 
   <button class="btn btn-warning"
-    [ngClass]="{'edit-new-task': editing}"
+    [ngClass]="{'edit-new-task': taskManager.editing}"
     (click)="taskManager.loadData()">Load Work</button>
 
   <button class="btn btn-warning"
-    [ngClass]="{'edit-new-task': editing}"
+    [ngClass]="{'edit-new-task': taskManager.editing}"
     (click)="toggleWorkEditing()">Edit Work</button>
 
   <form #f="ngForm" class="new-task-form" [ngClass]="{'edit-new-task': !taskManager.editing}">
@@ -56,11 +56,11 @@
       <button class="btn btn-success" (click)="taskManager.toggleEditing()">Cancel</button>
   </form>
 
-  <div class="alert alert-warning" style="margin-top: 15px;" role="alert" *ngIf="runningTask == null">
+  <div class="alert alert-warning" style="margin-top: 15px;" role="alert" *ngIf="taskManager.runningTask == null">
     <span class="h4">All tasks stopped!</span>
   </div>
-  <div class="alert alert-success" style="margin-top: 15px;" role="alert" *ngIf="runningTask != null">
-    <span class="h4">Task <b>{{runningTask.id}}</b> is running now.</span>
+  <div class="alert alert-success" style="margin-top: 15px;" role="alert" *ngIf="taskManager.runningTask != null">
+    <span class="h4">Task <b>{{taskManager.runningTask.id}}</b> is running now.</span>
   </div>
 
   <app-work-edit-list *ngIf="workEditing" [taskManager]="taskManager"></app-work-edit-list>

@@ -15,4 +15,8 @@ export class WorkEditListComponent implements OnInit {
   ngOnInit() {
   }
 
+  delete(task: Task, i: number) {
+    this.taskManager.deleteWork(task.id, i);
+  }
+
 }

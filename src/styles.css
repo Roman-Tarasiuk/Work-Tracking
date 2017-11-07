@@ -69,3 +69,9 @@
 .edit-time {
     width: 100%;
 }
+
+.edit-interval {
+    margin-top: 3px;
+    padding-bottom: 3px;
+    border-bottom: 1px dashed #c2e2b6;
+}

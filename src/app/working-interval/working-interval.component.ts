@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { WorkingInterval } from '../../working-interval.model';
 import { TimeLib } from '../../time.library';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-working-interval',
@@ -9,6 +10,10 @@ import { TimeLib } from '../../time.library';
 })
 export class WorkingIntervalComponent implements OnInit {
   @Input() workingInterval: WorkingInterval;
+
+  @Output() onDelete: EventEmitter<{}> = new EventEmitter();
+
+  format: string = "DD.MM.YYYY HH:mm:ss";
 
   constructor() { }
 
@@ -20,16 +25,19 @@ export class WorkingIntervalComponent implements OnInit {
   }
 
   update(start: string, end: string) {
-    // console.log('Updating:');
-    // console.log(start);
-    // console.log(end);
-    //this.workingInterval.start =
-    //var q = Date.parse(start);
+    var s = moment(start, this.format);
+    var e = moment(end, this.format);
 
-    // var q2 = new Date(start);
-    // console.log(q2);
+    this.workingInterval.start = s.toDate();
+    this.workingInterval.end = e.toDate();
+  }
 
-    this.workingInterval.start = new Date(start);
-    this.workingInterval.end = new Date(end);
+  displayTime(t) {
+    var m = moment(t);
+    return m.format(this.format);
+  }
+
+  delete() {
+    this.onDelete.emit();
   }
 }

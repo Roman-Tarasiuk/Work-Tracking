@@ -76,6 +76,18 @@ export class TaskManager {
     }
   }
 
+  deleteWork(taskId, i) {
+    var index = this.findTaskIndex(taskId);
+    
+    if ((index >= 0) && (index < this.tasks.length)) {
+      var t = this.tasks[index];
+
+      if (i >= 0 && i < t.workTime.length) {
+        t.workTime.splice(i, 1);
+      }
+    }
+  }
+
   saveData() {
     var running;
     if (this.runningTask != null) {

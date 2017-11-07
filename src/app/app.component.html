@@ -8,28 +8,32 @@
       <span class="h4">Task <b>{{runningTask.id}}</b> is running now.</span>
   </div>
 
-  <app-tasks-list [tasks]="tasks"
-      (onTaskStarted)="startTask($event)"
-      (onTaskStopped)="stopTasks()"
-      (onTaskMovedUp)="moveUp($event)"
-      (onTaskMovedDown)="moveDown($event)"
-      (onTaskEdit)="edit($event)"
-      (onTaskDelete)="delete($event)">
+  <app-tasks-list [tasks]="taskManager.tasks"
+      (onTaskStarted)="taskManager.startTask($event)"
+      (onTaskStopped)="taskManager.stopRunningTask()"
+      (onTaskMovedUp)="taskManager.moveUp($event)"
+      (onTaskMovedDown)="taskManager.moveDown($event)"
+      (onTaskEdit)="taskManager.edit($event)"
+      (onTaskDelete)="taskManager.delete($event)">
   </app-tasks-list>
 
   <button class="btn btn-success"
     [ngClass]="{'edit-new-task': editing}"
-    (click)="toggleEditing()">New Task</button>
+    (click)="taskManager.toggleEditing()">New Task</button>
 
   <button class="btn btn-primary"
     [ngClass]="{'edit-new-task': editing}"
-    (click)="saveData()">Save Work</button>
-  
+    (click)="taskManager.saveData()">Save Work</button>
+
   <button class="btn btn-warning"
     [ngClass]="{'edit-new-task': editing}"
-    (click)="loadData()">Load Work</button>
+    (click)="taskManager.loadData()">Load Work</button>
 
-  <form #f="ngForm" class="new-task-form" [ngClass]="{'edit-new-task': !editing}">
+  <button class="btn btn-warning"
+    [ngClass]="{'edit-new-task': editing}"
+    (click)="toggleWorkEditing()">Edit Work</button>
+
+  <form #f="ngForm" class="new-task-form" [ngClass]="{'edit-new-task': !taskManager.editing}">
       <h3>New Task:</h3>
 
       <div class="form-group">
@@ -46,10 +50,10 @@
         <label for="priority">Priority</label>
         <input type="text" class="form-control" id="priority" name="priority" required ngModel>
       </div>
-  
+
       <!--type="submit"-->
-      <button class="btn btn-success" (click)="submit(f)">Submit</button>
-      <button class="btn btn-success" (click)="toggleEditing()">Cancel</button>
+      <button class="btn btn-success" (click)="taskManager.newTask(f)">Submit</button>
+      <button class="btn btn-success" (click)="taskManager.toggleEditing()">Cancel</button>
   </form>
 
   <div class="alert alert-warning" style="margin-top: 15px;" role="alert" *ngIf="runningTask == null">
@@ -58,4 +62,6 @@
   <div class="alert alert-success" style="margin-top: 15px;" role="alert" *ngIf="runningTask != null">
     <span class="h4">Task <b>{{runningTask.id}}</b> is running now.</span>
   </div>
+
+  <app-work-edit-list *ngIf="workEditing" [taskManager]="taskManager"></app-work-edit-list>
 </div>

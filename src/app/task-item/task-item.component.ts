@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from '../../task.model';
+import { TimeLib } from '../../time.library'
 
 @Component({
   selector: 'app-task-item',
@@ -75,7 +76,7 @@ export class TaskItemComponent implements OnInit {
       }
     }
 
-    return this.timeStr(total);
+    return TimeLib.timeStr(total);
   }
 
   totalTimeWeek() {
@@ -96,13 +97,13 @@ export class TaskItemComponent implements OnInit {
       }
     }
 
-    return this.timeStr(total);
+    return TimeLib.timeStr(total);
   }
 
   totalTimeToday() {
     var today = new Date();
     today.setHours(0, 0, 0, 0);
- 
+
     var workTime = this.task.workTime;
     var total: number = 0;
 
@@ -112,53 +113,16 @@ export class TaskItemComponent implements OnInit {
       }
     }
 
-    return this.timeStr(total);
+    return TimeLib.timeStr(total);
   }
 
   // #region Helper Methods
-
-  private timeStr(total): string {
-    var oneDay = 1000 * 3600 * 24;
-    var totalDays = Math.floor(total / oneDay);
-    if (total >= oneDay) {
-      total -= totalDays * oneDay;
-    }
-
-    var oneHour = 1000 * 3600;
-    var totalHours = Math.floor(total / oneHour);
-    if (total >= oneHour){
-      total -= totalHours * oneHour;
-    }
-
-    var oneMinute = 1000 * 60;
-    var totalMinutes = Math.floor(total / oneMinute);
-    if (total >= oneMinute) {
-        total -= totalMinutes * oneMinute;
-    }
-
-    var oneSecond = 1000;
-    var totalSeconds = Math.floor(total / oneSecond);
-
-    return (totalDays > 0 ? (totalDays + 'd ') : '')
-        + (totalHours > 0 ? (totalHours + 'h ') : '')
-        + (totalMinutes > 0 ? (totalMinutes + 'm ') : '')
-        + totalSeconds + 's';
-  }
-
-//    timer() {
-//        if (!this.task.taskStarted) {
-//            return '';
-//        }
-//        else {
-//
-//        }
-//    }
 
   startTimer() {
     this.startTime = new Date();
 
     this.intervalId = window.setInterval(() => {
-        this.timer = this.timeStr(new Date().getTime() - this.startTime.getTime());
+        this.timer = TimeLib.timeStr(new Date().getTime() - this.startTime.getTime());
     }, 1000);
   }
 

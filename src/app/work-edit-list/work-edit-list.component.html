@@ -1,0 +1,11 @@
+<!--<app-work-edit-item ></app-work-edit-item>-->
+
+<div class="row" *ngFor="let t of taskManager.tasks">
+  <div class="row">
+    <div class="col-sm-2"><b>{{t.id}}</b></div>
+    <div class="col-sm-10"><i>{{t.title}}</i></div>
+  </div>
+  <div class="row" *ngFor="let wi of t.workTime">
+    <app-working-interval [workingInterval]="wi"></app-working-interval>
+  </div>
+</div>

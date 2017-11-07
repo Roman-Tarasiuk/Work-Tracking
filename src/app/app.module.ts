@@ -8,12 +8,16 @@ import {
 import { AppComponent } from './app.component';
 import { TasksListComponent } from './tasks-list/tasks-list.component';
 import { TaskItemComponent } from './task-item/task-item.component';
+import { WorkEditListComponent } from './work-edit-list/work-edit-list.component';
+import { WorkingIntervalComponent } from './working-interval/working-interval.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TasksListComponent,
-    TaskItemComponent
+    TaskItemComponent,
+    WorkEditListComponent,
+    WorkingIntervalComponent
   ],
   imports: [
     BrowserModule,

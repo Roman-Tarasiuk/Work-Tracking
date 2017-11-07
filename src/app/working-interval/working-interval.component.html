@@ -1,0 +1,4 @@
+<div class="col-sm-4"><input #s class="edit-time" value="{{workingInterval.start.toLocaleString()}}"></div>
+<div class="col-sm-4"><input #e class="edit-time" value="{{(workingInterval.end ? workingInterval.end.toLocaleString() : '')}}"></div>
+<div class="col-sm-2"><button (click)="update(s.value, e.value)">Update</button></div>
+<div class="col-sm-2">{{(workingInterval.end ? timeSpan(workingInterval.start, workingInterval.end) : '')}}</div>

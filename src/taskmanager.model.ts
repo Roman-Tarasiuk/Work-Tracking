@@ -75,7 +75,7 @@ export class TaskManager {
 
   deleteWork(taskId, i) {
     var index = this.findTaskIndex(taskId);
-    
+
     if ((index >= 0) && (index < this.tasks.length)) {
       var t = this.tasks[index];
 
@@ -108,6 +108,16 @@ export class TaskManager {
 
   newTask(id, title, priority) {
     this.addTask(id, title, priority);
+  }
+
+  getTaskTitle(taskId) {
+    var index = this.findTaskIndex(taskId);
+
+    if (index >= 0) {
+      return this.tasks[index].title;
+    }
+
+    return null;
   }
 
   private findTask(taskId): Task {

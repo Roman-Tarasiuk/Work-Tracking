@@ -13,6 +13,7 @@ export class AppComponent {
   taskManager: TaskManager;
   newTaskEditing: boolean = false;
   workEditing: boolean = false;
+  windowTitle: string = 'Work Tracking';
 
   constructor() {
     this.taskManager = new TaskManager();
@@ -22,6 +23,18 @@ export class AppComponent {
     this.taskManager.newTask(id, title, priority);
     f.resetForm();
     this.toggleNewTaskEditing();
+  }
+
+  startTask(id) {
+    this.taskManager.startTask(id);
+
+    document.title = this.taskManager.getTaskTitle(id) + ' - ' + this.windowTitle;
+  }
+
+  stopTask() {
+    this.taskManager.stopRunningTask(null);
+
+    document.title = this.windowTitle;
   }
 
   toggleNewTaskEditing() {

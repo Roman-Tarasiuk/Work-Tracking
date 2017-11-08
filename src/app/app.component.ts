@@ -28,13 +28,13 @@ export class AppComponent {
   startTask(id) {
     this.taskManager.startTask(id);
 
-    document.title = this.taskManager.getTaskTitle(id) + ' - ' + this.windowTitle;
+    document.title = '\u25B6 ' + this.taskManager.getTaskTitle(id) + ' - ' + this.windowTitle;
   }
 
   stopTask() {
     this.taskManager.stopRunningTask(null);
 
-    document.title = this.windowTitle;
+    document.title = '\u25A0 ' + this.windowTitle;
   }
 
   toggleNewTaskEditing() {

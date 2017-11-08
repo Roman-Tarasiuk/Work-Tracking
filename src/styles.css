@@ -5,7 +5,7 @@
 }
 
 .task-item-active {
-    background-color: #ccc;
+    background-color: #9cf;
 }
 
 .task-item-running {
@@ -36,16 +36,6 @@
 .new-task-form {
     background-color: #cfc;
     padding: 5px;
-}
-
-.btn-edit {
-    background-color: #d7e6f4 !important;
-    color: #73a7d9;
-}
-
-.btn-delete {
-    background-color: #f6d7d5 !important;
-    color:  #e0736c;
 }
 
 .edit-new-task {

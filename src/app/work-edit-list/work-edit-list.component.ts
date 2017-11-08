@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TaskManager } from '../../taskmanager.model';
 import { Task } from '../../task.model';
 
@@ -10,6 +10,8 @@ import { Task } from '../../task.model';
 export class WorkEditListComponent implements OnInit {
   @Input() taskManager: TaskManager;
 
+  @Output() onClose: EventEmitter<{}> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
@@ -17,6 +19,10 @@ export class WorkEditListComponent implements OnInit {
 
   delete(task: Task, i: number) {
     this.taskManager.deleteWork(task.id, i);
+  }
+
+  close() {
+    this.onClose.emit();
   }
 
 }

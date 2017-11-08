@@ -45,14 +45,18 @@
 
 .span-timer, .span-timer-desc {
     color: #fff;
-    background-color: #5cb85c;
     padding: 0px 4px;
     margin-right: 0;
     border-radius: 3px;
     float: right;
 }
 
+.span-timer-desc {
+    background-color: #5cb85c;
+}
+
 .span-timer {
+    background-color: #449d44;
     margin-top: 4px;
     font-weight: bold;
     display: inline-block;

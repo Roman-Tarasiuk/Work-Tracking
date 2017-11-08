@@ -1,5 +1,14 @@
 <div class="bg-warning">
-  <h3>Edit Work</h3>
+  <div class="row">
+    <div class="col-sm-10">
+      <h3>Edit Work</h3>
+    </div>
+    <div class="col-sm-2">
+        <button type="button" class="close" aria-label="Close" (click)="close()" style="margin-right: 5px;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+  </div>
   <div class="row edit-work" *ngFor="let t of taskManager.tasks">
     <div class="row">
       <div class="col-sm-2"><b>{{t.id}}</b></div>
@@ -12,4 +21,5 @@
       </app-working-interval>
     </div>
   </div>
+  <button class="btn btn-xs btn-warning" (click)="close()" style="margin: 5px;">Close</button>
 </div>

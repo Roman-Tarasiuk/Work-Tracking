@@ -1,4 +1,31 @@
-# WorkTracking
+# Work Tracking
+
+<h3>Helping tool for tracking time of your tasks.</h3>
+
+For running in offline mode download the '\_dist' folder and open 'index.html' file.
+
+For developing / building:
+
+1. Download / clone the project.
+2. In the project folder run the next commands from a command line (the Node.js must be installed on your computer):
+
+<code>npm install</code>
+
+<code>npm install moment</code>
+
+<code>npm install bootstrap</code>
+
+and then
+
+<code>ng serve</code>
+
+3. (Optional) For rebuilding offline files run the command:
+
+<code>ng build --target=production --base-href .\/</code>
+
+The result files will be placed into 'dist' folder.
+
+<hr>
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.6.
 

@@ -25,6 +25,8 @@ and then
 
 The result files will be placed into 'dist' folder.
 
+For now the program saves its data to a browser's local storage.
+
 <hr>
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.6.

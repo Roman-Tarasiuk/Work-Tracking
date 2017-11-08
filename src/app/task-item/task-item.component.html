@@ -27,7 +27,7 @@
     <div class="col-sm-3 h3">{{task.id}}</div>
     <div class="col-sm-9">
       <div *ngIf="isActive || task.started">
-        <div class="row">
+        <div class="row timers">
           <div class="col-sm-3">
             <div class="row">
               <span class="span-timer-desc">Total time</span>
@@ -54,9 +54,10 @@
           </div>
           <div class="col-sm-3">
             <div class="row">
-                &nbsp;
+                <span class="span-timer-desc" style="visibility: hidden">&nbsp;</span>
             </div>
             <div class="row">
+              <span *ngIf="!task.started" class="span-timer" style="visibility: hidden">&nbsp;</span>
               <span class="span-timer" *ngIf="task.started">+ {{timer}}</span>
             </div>
           </div>

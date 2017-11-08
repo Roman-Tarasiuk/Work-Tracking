@@ -1,11 +1,11 @@
-<div>
+<div class="bg-warning">
   <h3>Edit Work</h3>
-  <div class="row" *ngFor="let t of taskManager.tasks">
+  <div class="row edit-work" *ngFor="let t of taskManager.tasks">
     <div class="row">
       <div class="col-sm-2"><b>{{t.id}}</b></div>
       <div class="col-sm-10"><i>{{t.title}}</i></div>
     </div>
-    <div class="row edit-interval" *ngFor="let wi of t.workTime; let i = index">
+    <div class="row edit-interval edit-work" *ngFor="let wi of t.workTime; let i = index">
       <app-working-interval
         [workingInterval]="wi"
         (onDelete)="delete(t, i)">

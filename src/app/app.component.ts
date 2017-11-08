@@ -11,10 +11,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 })
 export class AppComponent {
   taskManager: TaskManager;
+  newTaskEditing: boolean = false;
   workEditing: boolean = false;
 
   constructor() {
     this.taskManager = new TaskManager();
+  }
+
+  addTask(id, title, priority, f) {
+    this.taskManager.newTask(id, title, priority);
+    f.resetForm();
+    this.toggleNewTaskEditing();
+  }
+
+  toggleNewTaskEditing() {
+    this.newTaskEditing = !this.newTaskEditing;
   }
 
   toggleWorkEditing() {

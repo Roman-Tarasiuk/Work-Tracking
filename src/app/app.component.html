@@ -18,42 +18,42 @@
   </app-tasks-list>
 
   <button class="btn btn-success"
-    [ngClass]="{'edit-new-task': taskManager.editing}"
-    (click)="taskManager.toggleEditing()">New Task</button>
+    [ngClass]="{'edit-new-task': newTaskEditing}"
+    (click)="toggleNewTaskEditing()">New Task</button>
 
   <button class="btn btn-primary"
-    [ngClass]="{'edit-new-task': taskManager.editing}"
+    [ngClass]="{'edit-new-task': newTaskEditing}"
     (click)="taskManager.saveData()">Save Work</button>
 
   <button class="btn btn-warning"
-    [ngClass]="{'edit-new-task': taskManager.editing}"
+    [ngClass]="{'edit-new-task': newTaskEditing}"
     (click)="taskManager.loadData()">Load Work</button>
 
   <button class="btn btn-warning"
-    [ngClass]="{'edit-new-task': taskManager.editing}"
+    [ngClass]="{'edit-new-task': newTaskEditing}"
     (click)="toggleWorkEditing()">Edit Work</button>
 
-  <form #f="ngForm" class="new-task-form" [ngClass]="{'edit-new-task': !taskManager.editing}">
+  <form #f="ngForm" class="new-task-form" [ngClass]="{'edit-new-task': !newTaskEditing}">
       <h3>New Task:</h3>
 
       <div class="form-group">
         <label for="id">ID</label>
-        <input type="text" class="form-control" id="id" name="id" required ngModel>
+        <input #id type="text" class="form-control" id="id" name="id" required ngModel>
       </div>
 
       <div class="form-group">
         <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" name="title" required ngModel>
+        <input #title type="text" class="form-control" id="title" name="title" required ngModel>
       </div>
 
       <div class="form-group">
         <label for="priority">Priority</label>
-        <input type="text" class="form-control" id="priority" name="priority" required ngModel>
+        <input #priority type="text" class="form-control" id="priority" name="priority" required ngModel>
       </div>
 
       <!--type="submit"-->
-      <button class="btn btn-success" (click)="taskManager.newTask(f)">Submit</button>
-      <button class="btn btn-success" (click)="taskManager.toggleEditing()">Cancel</button>
+      <button class="btn btn-success" (click)="addTask(id.value, title.value, priority.value, f)">Submit</button>
+      <button class="btn btn-success" (click)="toggleNewTaskEditing()">Cancel</button>
   </form>
 
   <div class="alert alert-warning" style="margin-top: 15px;" role="alert" *ngIf="taskManager.runningTask == null">

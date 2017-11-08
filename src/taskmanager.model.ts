@@ -3,7 +3,6 @@ import { Task } from './task.model';
 export class TaskManager {
   tasks: Task[];
   runningTask: Task = null;
-  editing: boolean = false;
 
   constructor() {
     this.tasks = [
@@ -62,8 +61,6 @@ export class TaskManager {
     var index = this.findTaskIndex(taskId);
 
     if ((index >= 0) && (index < this.tasks.length)) {
-      this.startEditing();
-
       // TO DO: Rest of logic.
     }
   }
@@ -109,18 +106,8 @@ export class TaskManager {
     this.tasks = this.getWorkFromStorage();
   }
 
-  newTask(f) {
-    this.addTask(f.value.id, f.value.title, f.value.priority);
-    f.resetForm();
-    this.toggleEditing();
-  }
-
-  toggleEditing() {
-    this.editing = !this.editing;
-  }
-
-  startEditing() {
-    this.editing = true;
+  newTask(id, title, priority) {
+    this.addTask(id, title, priority);
   }
 
   private findTask(taskId): Task {

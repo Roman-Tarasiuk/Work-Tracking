@@ -6,11 +6,11 @@
 }
 
 .task-item-active {
-    background-color: #9cf;
+    background-color: #d9edf7;
 }
 
 .task-item-running {
-    background-color: #c2e2b6;
+    background-color: #dff0d8;
 }
 
 .task-item h2 {

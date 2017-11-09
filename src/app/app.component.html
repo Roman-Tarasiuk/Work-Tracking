@@ -9,6 +9,7 @@
   </div>
 
   <app-tasks-list [tasks]="taskManager.tasks"
+      [timer]="timer"
       (onTaskStarted)="startTask($event)"
       (onTaskStopped)="stopTask()"
       (onTaskMovedUp)="taskManager.moveUp($event)"

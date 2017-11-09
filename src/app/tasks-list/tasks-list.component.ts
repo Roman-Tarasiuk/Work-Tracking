@@ -10,6 +10,7 @@ import { WorkingInterval } from '../../working-interval.model';
 })
 export class TasksListComponent implements OnInit {
   @Input() tasks: Task[];
+  @Input() timer: string;
 
   @Output() onTaskStarted: EventEmitter<string> = new EventEmitter();
   @Output() onTaskStopped: EventEmitter<string> = new EventEmitter();

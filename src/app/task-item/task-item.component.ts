@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from '../../task.model';
-import { TimeLib } from '../../time.library'
+import { TimeLib } from '../../time.library';
 
 @Component({
   selector: 'app-task-item',
@@ -9,6 +9,7 @@ import { TimeLib } from '../../time.library'
 })
 export class TaskItemComponent implements OnInit {
   @Input() task: Task;
+  @Input() timer: string;
 
   @Output() onTaskStarted: EventEmitter<string> = new EventEmitter();
   @Output() onTaskStopped: EventEmitter<string> = new EventEmitter();
@@ -19,10 +20,6 @@ export class TaskItemComponent implements OnInit {
 
   isActive: boolean = false;
 
-  intervalId: number;
-  timer: string;
-  startTime: Date;
-
   constructor() {
   }
 
@@ -31,11 +28,11 @@ export class TaskItemComponent implements OnInit {
 
   toggle(event) {
       if (!this.task.started) {
-        this.startTimer();
+        //this.startTimer();
         this.onTaskStarted.emit(this.task.id);
       }
       else {
-        this.stopTimer();
+        //this.stopTimer();
         this.isActive = false;
         this.onTaskStopped.emit(this.task.id);
       }
@@ -116,20 +113,4 @@ export class TaskItemComponent implements OnInit {
     return TimeLib.timeStr(total);
   }
 
-  // #region Helper Methods
-
-  startTimer() {
-    this.startTime = new Date();
-
-    this.intervalId = window.setInterval(() => {
-        this.timer = TimeLib.timeStr(new Date().getTime() - this.startTime.getTime());
-    }, 1000);
-  }
-
-  stopTimer() {
-    window.clearInterval(this.intervalId);
-    this.timer = '';
-  }
-
-// #endregion
 }

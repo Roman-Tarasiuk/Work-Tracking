@@ -18,9 +18,12 @@ export class TaskManager {
         }
         this.runningTask = this.tasks[i];
         this.runningTask.startWork(new Date());
-        break;
+        
+        return true;
       }
     }
+
+    return false;
   }
 
   stopRunningTask(date) {

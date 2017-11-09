@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TaskManager } from '../taskmanager.model';
 import { WorkingInterval } from '../working-interval.model';
+import { TimeLib } from '../time.library';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -14,7 +15,11 @@ export class AppComponent {
   newTaskEditing: boolean = false;
   workEditing: boolean = false;
   windowTitle: string = 'Work Tracking';
-
+  
+  timer: string; 
+  intervalId: number;
+  startTime: Date;
+ 
   constructor() {
     this.taskManager = new TaskManager();
   }
@@ -26,13 +31,15 @@ export class AppComponent {
   }
 
   startTask(id) {
-    this.taskManager.startTask(id);
-
-    document.title = '\u25B6 ' + this.taskManager.getTaskTitle(id) + ' - ' + this.windowTitle;
+    if (this.taskManager.startTask(id)) {
+      this.startTimer();
+      document.title = '\u25B6 ' + this.taskManager.runningTask.title + ' - ' + this.windowTitle;
+    }
   }
 
   stopTask() {
     this.taskManager.stopRunningTask(null);
+    this.stopTimer();
 
     document.title = '\u25A0 ' + this.windowTitle;
   }
@@ -44,4 +51,20 @@ export class AppComponent {
   toggleWorkEditing() {
     this.workEditing = !this.workEditing;
   }
+
+
+  startTimer() {
+    this.startTime = new Date();
+
+    this.intervalId = window.setInterval(() => {
+        this.timer = TimeLib.timeStr(new Date().getTime() - this.startTime.getTime());
+        document.title = '\u25B6 ' + this.timer + ' ' + this.taskManager.runningTask.title + ' - ' + this.windowTitle;
+    }, 1000);
+  }
+
+  stopTimer() {
+    window.clearInterval(this.intervalId);
+    this.timer = '';
+  }
+
 }

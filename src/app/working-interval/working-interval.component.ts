@@ -25,11 +25,15 @@ export class WorkingIntervalComponent implements OnInit {
   }
 
   update(start: string, end: string) {
-    var s = moment(start, this.format);
-    var e = moment(end, this.format);
+    var s = moment(start, this.format).toDate();
+    var e = moment(end, this.format).toDate();
 
-    this.workingInterval.start = s.toDate();
-    this.workingInterval.end = e.toDate();
+    if (s.getTime()) {
+      this.workingInterval.start = s;
+    }
+    if (e.getTime()) {
+      this.workingInterval.end = e;
+    }
   }
 
   displayTime(t) {

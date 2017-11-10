@@ -15,11 +15,11 @@ export class AppComponent {
   newTaskEditing: boolean = false;
   workEditing: boolean = false;
   windowTitle: string = 'Work Tracking';
-  
-  timer: string; 
+
+  timer: string;
   intervalId: number;
   startTime: Date;
- 
+
   constructor() {
     this.taskManager = new TaskManager();
   }
@@ -57,8 +57,12 @@ export class AppComponent {
     this.startTime = new Date();
 
     this.intervalId = window.setInterval(() => {
-        this.timer = TimeLib.timeStr(new Date().getTime() - this.startTime.getTime());
-        document.title = '\u25B6 ' + this.timer + ' ' + this.taskManager.runningTask.title + ' - ' + this.windowTitle;
+        var timeSpan = new Date().getTime() - this.startTime.getTime();
+
+        this.timer = TimeLib.timeStr(timeSpan);
+        var timeTitle = TimeLib.timeStrDigitalClock(timeSpan);
+
+        document.title = '\u25B6 ' + timeTitle + ' ** ' + this.taskManager.runningTask.title + ' - ' + this.windowTitle;
     }, 1000);
   }
 

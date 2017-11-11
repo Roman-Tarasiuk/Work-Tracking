@@ -18,8 +18,8 @@ export class TimeLib {
 
     return (t.totalDays > 0 ? TimeLib.format(t.totalDays, '', 'd ') : '')
         + (t.totalHours > 0 ? TimeLib.format(t.totalHours, '00', ':') : '')
-        + (t.totalMinutes > 0 ? TimeLib.format(t.totalMinutes, '00', '') : '')
-        + TimeLib.format(t.totalSeconds, ':00', '');
+        + TimeLib.format(t.totalMinutes, '00', ':')
+        + TimeLib.format(t.totalSeconds, '00', '');
   }
 
   private static splitTime(total) {

@@ -25,8 +25,12 @@ export class Task {
     }
 
     endWork (d: Date) {
+        this.setEnd(d);
+        this.started = false;
+    }
+
+    setEnd (d: Date) {
         var len = this.workTime.length;
         this.workTime[len - 1].end = d;
-        this.started = false;
     }
 }

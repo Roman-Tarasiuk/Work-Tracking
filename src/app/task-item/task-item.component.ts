@@ -28,11 +28,9 @@ export class TaskItemComponent implements OnInit {
 
   toggle(event) {
       if (!this.task.started) {
-        //this.startTimer();
         this.onTaskStarted.emit(this.task.id);
       }
       else {
-        //this.stopTimer();
         this.isActive = false;
         this.onTaskStopped.emit(this.task.id);
       }

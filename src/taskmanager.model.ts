@@ -26,15 +26,18 @@ export class TaskManager {
     return false;
   }
 
-  stopRunningTask(date) {
+  stopRunningTask(date: Date) {
     if (this.runningTask != null) {
-      if (date) {
-        this.runningTask.endWork(date);
-      }
-      else {
-        this.runningTask.endWork(new Date());
-      }
+      var d = date || new Date();
+      this.runningTask.endWork(d);
       this.runningTask = null;
+    }
+  }
+
+  updateRunningTask(date: Date) {
+    if (this.runningTask != null) {
+      var d = date || new Date();
+      this.runningTask.setEnd(d);
     }
   }
 
@@ -89,24 +92,26 @@ export class TaskManager {
   }
 
   saveData() {
-    var running;
-    if (this.runningTask != null) {
-      running = this.runningTask;
-    }
-
-    var d = new Date();
-    this.stopRunningTask(d);
     this.uploadWorkToStorage(this.tasks);
-
-    if (running != null) {
-      this.runningTask = running;
-      this.runningTask.startWork(d);
-    }
   }
 
   loadData() {
-    this.stopRunningTask(new Date());
     this.tasks = this.getWorkFromStorage();
+  }
+
+  checkWork(): boolean {
+    var result: boolean = true;
+    for (var i = 0; i < this.tasks.length; i++) {
+      var t = this.tasks[i];
+      for (var j = 0; j < t.workTime.length; j++) {
+        if((t.workTime[j].end == null) && (!this.runningTask)) {
+          result = false;
+          break;
+        }
+      }
+    }
+
+    return result;
   }
 
   newTask(id, title, priority) {

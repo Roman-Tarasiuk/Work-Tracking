@@ -18,6 +18,8 @@ export class AppComponent {
 
   timer: string;
   intervalId: number;
+  intervalAutosaveId: number;
+  autoSaveInterval: number = 1000 * 60 * 2.5;
   startTime: Date;
 
   constructor() {
@@ -31,6 +33,12 @@ export class AppComponent {
   }
 
   startTask(id) {
+    if (this.taskManager.runningTask) {
+      this.taskManager.stopRunningTask(new Date());
+      this.taskManager.saveData();
+      this.stopTimer();
+    }
+
     if (this.taskManager.startTask(id)) {
       this.startTimer();
       document.title = '\u25B6 ' + this.taskManager.runningTask.title + ' - ' + this.windowTitle;
@@ -64,10 +72,18 @@ export class AppComponent {
 
         document.title = '\u25B6 ' + timeTitle + ' ** ' + this.taskManager.runningTask.title + ' - ' + this.windowTitle;
     }, 1000);
+
+    this.intervalAutosaveId = window.setInterval(() => {
+      var d = new Date();
+      this.taskManager.updateRunningTask(d);
+      this.taskManager.saveData();
+    }, this.autoSaveInterval);
   }
 
   stopTimer() {
     window.clearInterval(this.intervalId);
+    window.clearInterval(this.intervalAutosaveId);
+    
     this.timer = '';
   }
 

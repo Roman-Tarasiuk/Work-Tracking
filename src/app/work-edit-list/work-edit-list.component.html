@@ -9,6 +9,13 @@
         </button>
     </div>
   </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="alert alert-warning" style="margin-top: 5px;" role="alert" *ngIf="!taskManager.checkWork()">
+        <span class="h4">Some task(s) has error(s) in working intervals.</span>
+      </div>
+    </div>
+  </div>
   <div class="row edit-work" *ngFor="let t of taskManager.tasks">
     <div class="row">
       <div class="col-sm-2"><b>{{t.id}}</b></div>

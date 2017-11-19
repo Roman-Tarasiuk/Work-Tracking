@@ -64,6 +64,12 @@
 
 .edit-time {
     width: 100%;
+    border: 0;
+    line-height: 1em;
+}
+
+.edit-time-button {
+    border: 1px solid #aaa;
 }
 
 .timers {

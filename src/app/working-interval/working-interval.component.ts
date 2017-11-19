@@ -31,8 +31,15 @@ export class WorkingIntervalComponent implements OnInit {
     if (s.getTime()) {
       this.workingInterval.start = s;
     }
+    else {
+      this.workingInterval.start = null;
+    }
+
     if (e.getTime()) {
       this.workingInterval.end = e;
+    }
+    else {
+      this.workingInterval.end = null;
     }
   }
 

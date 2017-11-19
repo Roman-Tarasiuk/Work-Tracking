@@ -18,7 +18,7 @@ export class TaskManager {
         }
         this.runningTask = this.tasks[i];
         this.runningTask.startWork(new Date());
-        
+
         return true;
       }
     }
@@ -104,7 +104,8 @@ export class TaskManager {
     for (var i = 0; i < this.tasks.length; i++) {
       var t = this.tasks[i];
       for (var j = 0; j < t.workTime.length; j++) {
-        if((t.workTime[j].end == null) && (!this.runningTask)) {
+        if((t.workTime[j].end == null)
+            && ((j < (t.workTime.length - 1)) || (!this.runningTask))) {
           result = false;
           break;
         }

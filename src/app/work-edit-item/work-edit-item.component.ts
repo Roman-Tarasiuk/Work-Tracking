@@ -2,11 +2,11 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from '../../task.model';
 
 @Component({
-  selector: 'app-work-edit-list',
-  templateUrl: './work-edit-list.component.html',
-  styleUrls: ['./work-edit-list.component.css']
+  selector: 'app-work-edit-item',
+  templateUrl: './work-edit-item.component.html',
+  styleUrls: ['./work-edit-item.component.css']
 })
-export class WorkEditListComponent implements OnInit {
+export class WorkEditItemComponent implements OnInit {
   @Output() onDeleteWorkingInterval: EventEmitter<number> = new EventEmitter();
   @Input() task: Task;
   

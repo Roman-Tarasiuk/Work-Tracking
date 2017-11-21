@@ -16,9 +16,9 @@
       </div>
     </div>
   </div>
-  <app-work-edit-list *ngFor="let t of taskManager.tasks"
+  <app-work-edit-item *ngFor="let t of taskManager.tasks"
     (onDeleteWorkingInterval)="delete(t, $event)"
     [task]="t">
-  </app-work-edit-list>
+  </app-work-edit-item>
   <button class="btn btn-xs btn-warning" (click)="close()" style="margin: 5px;">Close</button>
 </div>

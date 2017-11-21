@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WorkEditListComponent } from './work-edit-list.component';
+import { WorkEditItemComponent } from './work-edit-item.component';
 
 describe('WorkEditListComponent', () => {
-  let component: WorkEditListComponent;
-  let fixture: ComponentFixture<WorkEditListComponent>;
+  let component: WorkEditItemComponent;
+  let fixture: ComponentFixture<WorkEditItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WorkEditListComponent ]
+      declarations: [ WorkEditItemComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WorkEditListComponent);
+    fixture = TestBed.createComponent(WorkEditItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

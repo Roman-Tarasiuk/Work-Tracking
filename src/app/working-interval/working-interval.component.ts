@@ -10,6 +10,8 @@ import * as moment from 'moment';
 })
 export class WorkingIntervalComponent implements OnInit {
   @Input() workingInterval: WorkingInterval;
+  @Input() filterFrom: Date;
+  @Input() filterTo: Date;
 
   @Output() onDelete: EventEmitter<{}> = new EventEmitter();
 
@@ -50,5 +52,18 @@ export class WorkingIntervalComponent implements OnInit {
 
   delete() {
     this.onDelete.emit();
+  }
+
+  matchesFilter() {
+    var result: boolean = true;
+
+    if (this.filterFrom && (this.workingInterval.start < this.filterFrom)) {
+      result = false;
+    }
+    if (this.filterTo && (this.workingInterval.end > this.filterTo)){
+      result = false;
+    }
+
+    return result;
   }
 }

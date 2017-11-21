@@ -1,8 +1,10 @@
-<div class="col-sm-3"><input #s class="edit-time" value="{{displayTime(workingInterval.start)}}"></div>
-<div class="col-sm-3"><input #e class="edit-time" value="{{(workingInterval.end ? displayTime(workingInterval.end) : '')}}"></div>
-<div class="col-sm-3">
-    <button class="edit-time-button" (click)="update(s.value, e.value)">Update</button>
-    <button class="edit-time-button" (click)="delete()">Delete</button>
-</div>
+<div *ngIf="matchesFilter()">
+    <div class="col-sm-3"><input #s class="edit-time" value="{{displayTime(workingInterval.start)}}"></div>
+    <div class="col-sm-3"><input #e class="edit-time" value="{{(workingInterval.end ? displayTime(workingInterval.end) : '')}}"></div>
+    <div class="col-sm-3">
+        <button class="edit-time-button" (click)="update(s.value, e.value)">Update</button>
+        <button class="edit-time-button" (click)="delete()">Delete</button>
+    </div>
 
-<div class="col-sm-3">{{(workingInterval.end ? timeSpan(workingInterval.start, workingInterval.end) : '')}}</div>
+    <div class="col-sm-3">{{(workingInterval.end ? timeSpan(workingInterval.start, workingInterval.end) : '')}}</div>
+</div>

@@ -68,6 +68,16 @@
     line-height: 1em;
 }
 
+.edit-time-filter {
+    border: 0;
+    line-height: 1em;
+}
+
+.filter {
+    padding-bottom: 4px;
+    margin-bottom: 6px;
+}
+
 .edit-time-button {
     border: 1px solid #aaa;
 }

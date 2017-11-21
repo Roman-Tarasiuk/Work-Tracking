@@ -64,8 +64,8 @@
     <span class="h4">Task <b>{{taskManager.runningTask.id}}</b> is running now.</span>
   </div>
 
-  <app-work-edit-list *ngIf="workEditing"
+  <app-work-edit *ngIf="workEditing"
     [taskManager]="taskManager"
     (onClose)="toggleWorkEditing()">
-  </app-work-edit-list>
+  </app-work-edit>
 </div>

@@ -10,6 +10,7 @@ import { TasksListComponent } from './tasks-list/tasks-list.component';
 import { TaskItemComponent } from './task-item/task-item.component';
 import { WorkEditListComponent } from './work-edit-list/work-edit-list.component';
 import { WorkingIntervalComponent } from './working-interval/working-interval.component';
+import { WorkEditComponent } from './work-edit/work-edit.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { WorkingIntervalComponent } from './working-interval/working-interval.co
     TasksListComponent,
     TaskItemComponent,
     WorkEditListComponent,
-    WorkingIntervalComponent
+    WorkingIntervalComponent,
+    WorkEditComponent
   ],
   imports: [
     BrowserModule,

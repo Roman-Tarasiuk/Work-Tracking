@@ -1,32 +1,17 @@
-<div class="bg-warning">
+<div class="row edit-work">
   <div class="row">
-    <div class="col-sm-10">
-      <h3>Edit Work</h3>
-    </div>
-    <div class="col-sm-2">
-        <button type="button" class="close" aria-label="Close" (click)="close()" style="margin-right: 5px;">
-          <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+    <div class="col-sm-2"><b>{{task.id}}</b></div>
+    <div class="col-sm-10"><span class="edit-work-title">{{task.title}}</span></div>
   </div>
-  <div class="row">
+  <div class="row intervals-container">
     <div class="col-sm-12">
-      <div class="alert alert-warning" style="margin-top: 5px;" role="alert" *ngIf="!taskManager.checkWork()">
-        <span class="h4">Some task(s) has error(s) in working intervals.</span>
+      <div class="row edit-interval edit-work" *ngFor="let wi of task.workTime; let i = index">
+        <app-working-interval
+          [workingInterval]="wi"
+          (onDelete)="deleteWI(i)">
+        </app-working-interval>
       </div>
     </div>
   </div>
-  <div class="row edit-work" *ngFor="let t of taskManager.tasks">
-    <div class="row">
-      <div class="col-sm-2"><b>{{t.id}}</b></div>
-      <div class="col-sm-10"><i>{{t.title}}</i></div>
-    </div>
-    <div class="row edit-interval edit-work" *ngFor="let wi of t.workTime; let i = index">
-      <app-working-interval
-        [workingInterval]="wi"
-        (onDelete)="delete(t, i)">
-      </app-working-interval>
-    </div>
-  </div>
-  <button class="btn btn-xs btn-warning" (click)="close()" style="margin: 5px;">Close</button>
 </div>
+  

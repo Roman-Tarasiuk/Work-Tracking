@@ -78,10 +78,22 @@
     width: 100%;
 }
 
+.intervals-container {
+    height: 300px;
+    overflow: scroll;
+}
+
 .edit-interval {
     margin-top: 3px;
     padding-bottom: 3px;
     border-bottom: 1px dashed #c2e2b6;
+}
+
+.edit-work-title {
+    color:  darkslateblue;
+    font-size: 1.1em;
+    font-weight: bold;
+    font-style: italic;
 }
 
 .edit-work {

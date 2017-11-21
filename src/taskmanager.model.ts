@@ -1,8 +1,11 @@
 import { Task } from './task.model';
+import * as moment from 'moment';
 
 export class TaskManager {
   tasks: Task[];
   runningTask: Task = null;
+
+  private format: string = "DD.MM.YYYY HH:mm:ss";
 
   constructor() {
     this.tasks = [
@@ -11,13 +14,16 @@ export class TaskManager {
   }
 
   startTask(taskId) {
+    var t;
     for (var i = 0; i < this.tasks.length; i++) {
       if (this.tasks[i].id == taskId) {
+        t = new Date();
+        t = this.dateTrim(t);
         if (this.runningTask != null) {
-          this.runningTask.endWork(new Date());
+          this.runningTask.endWork(t);
         }
         this.runningTask = this.tasks[i];
-        this.runningTask.startWork(new Date());
+        this.runningTask.startWork(t);
 
         return true;
       }
@@ -29,6 +35,7 @@ export class TaskManager {
   stopRunningTask(date: Date) {
     if (this.runningTask != null) {
       var d = date || new Date();
+      d = this.dateTrim(d);
       this.runningTask.endWork(d);
       this.runningTask = null;
     }
@@ -203,5 +210,10 @@ export class TaskManager {
       }
 
       return result;
+  }
+
+  dateTrim(date: Date) {
+    var m = moment(date);
+    return moment(m.format(this.format), this.format).toDate();
   }
 }

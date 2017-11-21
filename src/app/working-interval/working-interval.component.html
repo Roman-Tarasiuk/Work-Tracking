@@ -1,4 +1,4 @@
-<div *ngIf="matchesFilter()">
+<div class="row edit-interval edit-work" *ngIf="matchesFilter()">
     <div class="col-sm-3"><input #s class="edit-time" value="{{displayTime(workingInterval.start)}}"></div>
     <div class="col-sm-3"><input #e class="edit-time" value="{{(workingInterval.end ? displayTime(workingInterval.end) : '')}}"></div>
     <div class="col-sm-3">

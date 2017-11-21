@@ -8,21 +8,25 @@
   <div class="row filter">
       <span style="margin-left: 20px;">From:</span>
       <input class="edit-time-filter" #from>
+      <button type="button" class="close" aria-label="Close" (click)="from.value=''" style="float:initial">
+        <span aria-hidden="true">&times;</span>
+      </button>
       <span>To:</span>
       <input class="edit-time-filter" #to>
-      <button class="edit-time-button" (click)="applyFilter(from.value, to.value)">Apply</button>
-      <span class="span-timer">{{totalTime()}}</span>
+      <button type="button" class="close" aria-label="Close" (click)="to.value=''" style="float:initial">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <button class="edit-time-button" (click)="applyFilter(from.value, to.value)">Filter</button>
+      <span class="span-timer-desc" style="margin-right: 20px;">{{totalTime()}}</span>
   </div>
   <div class="row intervals-container">
     <div class="col-sm-12">
-      <div class="row edit-interval edit-work" *ngFor="let wi of task.workTime; let i = index">
-        <app-working-interval
-          [filterFrom]="filterFrom"
-          [filterTo]="filterTo"
-          [workingInterval]="wi"
-          (onDelete)="deleteWI(i)">
-        </app-working-interval>
-      </div>
+      <app-working-interval *ngFor="let wi of task.workTime; let i = index"
+        [filterFrom]="filterFrom"
+        [filterTo]="filterTo"
+        [workingInterval]="wi"
+        (onDelete)="deleteWI(i)">
+      </app-working-interval>
     </div>
   </div>
 </div>

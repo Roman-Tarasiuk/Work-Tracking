@@ -15,6 +15,8 @@ export class WorkingIntervalComponent implements OnInit {
 
   @Output() onDelete: EventEmitter<{}> = new EventEmitter();
 
+  isActive: boolean = false;
+
   format: string = "DD.MM.YYYY HH:mm:ss";
 
   constructor() { }
@@ -65,5 +67,15 @@ export class WorkingIntervalComponent implements OnInit {
     }
 
     return result;
+  }
+
+  setActive() {
+    this.isActive = true;
+  }
+
+  unsetActive() {
+    setTimeout(() => {
+      this.isActive = false;
+    }, 500);
   }
 }

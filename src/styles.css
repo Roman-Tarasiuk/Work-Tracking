@@ -80,6 +80,7 @@
 
 .edit-time-button {
     border: 1px solid #aaa;
+    line-height: 1em;
 }
 
 .timers {
@@ -99,6 +100,14 @@
     border-bottom: 1px dashed #c2e2b6;
 }
 
+.edit-interval-time {
+    text-align: right;
+}
+
+.edit-interval-time-span {
+    padding-right: 20px;
+}
+
 .edit-work-title {
     color:  darkslateblue;
     font-size: 1.1em;
@@ -109,4 +118,9 @@
 .edit-work {
     margin: 0 !important;
     width: 100%;
+}
+
+.toolbar {
+    margin-top: 15px;
+    margin-bottom: 5px;
 }

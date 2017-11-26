@@ -1,3 +1,33 @@
+^ks – Save All
+^k ^x – Trim Trailing Whitespace
+^+p – Command Line
+^+p {BACKSPACE} edt  – Show All Editors (with space at the end)
+
+
+
+(function accuweatherChangeView() {
+    var cssFirst = document.getElementsByClassName('first');
+    var cssCurrent = document.getElementsByClassName('current');
+    var cssFirstAndCurrent = [];
+    
+    for (var i = 0; i < cssFirst.length; i++) {
+        for (var j = 0; j <cssCurrent.length; j++) {
+            if (cssFirst[i] == cssCurrent[j]) {
+                cssFirstAndCurrent.push(cssFirst[i]);
+            }
+        }
+    }
+    
+    console.log('.first, .current: ' + cssFirstAndCurrent.length + ' element(s).');
+    
+    for (var i = 0; i < cssFirstAndCurrent.length; i++) {
+        cssFirstAndCurrent[i].classList.remove('first');
+        cssFirstAndCurrent[i].classList.remove('current');
+    }
+})();
+
+
+
 YOU DON’T KNOW JS
  ■ Up & Going
  ■ Scope & Closures

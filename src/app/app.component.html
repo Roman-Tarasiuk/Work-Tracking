@@ -18,21 +18,23 @@
       (onTaskDelete)="taskManager.delete($event)">
   </app-tasks-list>
 
-  <button class="btn btn-success"
-    [ngClass]="{'edit-new-task': newTaskEditing}"
-    (click)="toggleNewTaskEditing()">New Task</button>
+  <div class="toolbar">
+    <button class="btn btn-success"
+      [ngClass]="{'edit-new-task': newTaskEditing}"
+      (click)="toggleNewTaskEditing()">New Task</button>
 
-  <button class="btn btn-primary"
-    [ngClass]="{'edit-new-task': newTaskEditing}"
-    (click)="saveWork()">Save Work</button>
+    <button class="btn btn-primary"
+      [ngClass]="{'edit-new-task': newTaskEditing}"
+      (click)="saveWork()">Save Work</button>
 
-  <button class="btn btn-warning"
-    [ngClass]="{'edit-new-task': newTaskEditing}"
-    (click)="taskManager.loadData()">Load Work</button>
+    <button class="btn btn-warning"
+      [ngClass]="{'edit-new-task': newTaskEditing}"
+      (click)="taskManager.loadData()">Load Work</button>
 
-  <button class="btn btn-warning"
-    [ngClass]="{'edit-new-task': newTaskEditing}"
-    (click)="toggleWorkEditing()">Edit Work</button>
+    <button class="btn btn-warning"
+      [ngClass]="{'edit-new-task': newTaskEditing}"
+      (click)="toggleWorkEditing()">Edit Work</button>
+  </div>
 
   <form #f="ngForm" class="new-task-form" [ngClass]="{'edit-new-task': !newTaskEditing}">
       <h3>New Task:</h3>

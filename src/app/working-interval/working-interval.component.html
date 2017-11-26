@@ -1,10 +1,32 @@
 <div class="row edit-interval edit-work" *ngIf="matchesFilter()">
-    <div class="col-sm-3"><input #s class="edit-time" value="{{displayTime(workingInterval.start)}}"></div>
-    <div class="col-sm-3"><input #e class="edit-time" value="{{(workingInterval.end ? displayTime(workingInterval.end) : '')}}"></div>
     <div class="col-sm-3">
-        <button class="edit-time-button" (click)="update(s.value, e.value)">Update</button>
-        <button class="edit-time-button" (click)="delete()">Delete</button>
+        <input #s class="edit-time"
+            value="{{displayTime(workingInterval.start)}}"
+            (focus)="setActive()"
+            (blur)="unsetActive()">
     </div>
-
-    <div class="col-sm-3">{{(workingInterval.end ? timeSpan(workingInterval.start, workingInterval.end) : '')}}</div>
+    <div class="col-sm-3">
+        <input #e class="edit-time"
+            value="{{(workingInterval.end ? displayTime(workingInterval.end) : '')}}"
+            (focus)="setActive()"
+            (blur)="unsetActive()">
+    </div>
+    <div class="col-sm-3 edit-interval-time">
+        <span class="edit-interval-time-span">
+            {{(workingInterval.end ? timeSpan(workingInterval.start, workingInterval.end) : '')}}
+        </span>
+    </div>
+    <div class="col-sm-3">
+        <button
+            *ngIf="isActive"
+            class="edit-time-button"
+            (click)="update(s.value, e.value)"
+            >Update
+        </button>
+        <button
+            *ngIf="isActive"
+            class="edit-time-button"
+            (click)="delete()">Delete
+        </button>
+    </div>
 </div>

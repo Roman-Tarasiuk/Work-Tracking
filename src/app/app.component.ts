@@ -18,12 +18,9 @@ export class AppComponent {
 
   timer: string;
   timerEnabled: boolean = true;
-  intervalTimer1Id: number;
-  intervalTimer2Id: number;
+  intervalTimerId: number;
   intervalAutosaveId: number;
-  intervalTimer1: number = 1000;
-  intervalTimer2: number = 1000 * 10;
-  timer1MaxTicks: number = 10;
+  intervalTimer: number = 1000;
   autoSaveInterval: number = 1000 * 60 * 2.5;
   startTime: Date;
 
@@ -80,7 +77,6 @@ export class AppComponent {
       this.timerEnabled = true;
     }, this.autoSaveInterval);
 
-    var ticks = 0;
     var self = this;
 
     function timer() {
@@ -91,24 +87,14 @@ export class AppComponent {
           var timeTitle = TimeLib.timeStrDigitalClock(timeSpan);
 
           document.title = '\u25B6 ' + timeTitle + ' ** ' + self.taskManager.runningTask.title + ' - ' + self.windowTitle;
-
-          if (ticks >=0 && ticks < self.timer1MaxTicks) {
-            ticks++;
-          }
-          else if (ticks >= self.timer1MaxTicks) {
-            window.clearInterval(self.intervalTimer1Id);
-            ticks = -1;
-          }
         }
     }
 
-    this.intervalTimer1Id = window.setInterval(timer, this.intervalTimer1);
-    this.intervalTimer2Id = window.setInterval(timer, this.intervalTimer2);
+    this.intervalTimerId = window.setInterval(timer, this.intervalTimer);
   }
 
   stopTimer() {
-    window.clearInterval(this.intervalTimer1Id);
-    window.clearInterval(this.intervalTimer2Id);
+    window.clearInterval(this.intervalTimerId);
     window.clearInterval(this.intervalAutosaveId);
 
     this.timer = '';

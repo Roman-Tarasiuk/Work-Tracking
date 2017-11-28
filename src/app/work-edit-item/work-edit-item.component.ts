@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 import { Task } from '../../task.model';
 import { TimeLib } from '../../time.library';
 import * as moment from 'moment';
@@ -8,12 +8,12 @@ import * as moment from 'moment';
   templateUrl: './work-edit-item.component.html',
   styleUrls: ['./work-edit-item.component.css']
 })
-export class WorkEditItemComponent implements OnInit {
+export class WorkEditItemComponent implements OnInit, OnChanges {
   @Output() onDeleteWorkingInterval: EventEmitter<number> = new EventEmitter();
   @Input() task: Task;
 
-  filterFrom: Date;
-  filterTo: Date;
+  @Input() filterFrom: Date;
+  @Input() filterTo: Date;
 
   format: string = "DD.MM.YYYY HH:mm:ss";
 
@@ -21,6 +21,16 @@ export class WorkEditItemComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  ngOnChanges(changes: SimpleChanges) {
+    var resutltStr: string = "";
+    if (changes.filterFrom) {
+      this.filterFrom = changes.filterFrom.currentValue;
+    }
+    if (changes.filterTo) {
+      this.filterTo = changes.filterTo.currentValue;
+    }
+   }
 
   deleteWI(i: number) {
     this.onDeleteWorkingInterval.emit(i);

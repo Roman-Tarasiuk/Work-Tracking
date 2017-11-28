@@ -16,8 +16,31 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="alert alert-success">
+        <h4>Common Filter</h4>
+        <div class="row filter">
+            <span style="margin-left: 20px;">From:</span>
+            <input class="edit-time-filter" #from>
+            <button type="button" class="close" aria-label="Close" (click)="from.value=''" style="float:initial">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <span>To:</span>
+            <input class="edit-time-filter" #to>
+            <button type="button" class="close" aria-label="Close" (click)="to.value=''" style="float:initial">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <button class="edit-time-button" (click)="applyFilter(from.value, to.value)">Filter</button>
+            <!-- <span class="span-timer-desc" style="margin-right: 20px;">{{totalTime()}}</span> -->
+        </div>
+      </div>
+    </div>
+  </div>
   <app-work-edit-item *ngFor="let t of taskManager.tasks"
     (onDeleteWorkingInterval)="delete(t, $event)"
+    [filterFrom]="commonFilterFrom"
+    [filterTo]="commonFilterTo"
     [task]="t">
   </app-work-edit-item>
   <button class="btn btn-xs btn-warning" (click)="close()" style="margin: 5px;">Close</button>

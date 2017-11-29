@@ -7,16 +7,18 @@
   </div>
   <div class="row filter">
       <span style="margin-left: 20px;">From:</span>
-      <input class="edit-time-filter" #from>
+      <input class="edit-time-filter" #from value="{{formatted(filterFrom)}}">
       <button type="button" class="close" aria-label="Close" (click)="from.value=''" style="float:initial">
         <span aria-hidden="true">&times;</span>
       </button>
       <span>To:</span>
-      <input class="edit-time-filter" #to>
+      <input class="edit-time-filter" #to value="{{formatted(filterTo)}}">
       <button type="button" class="close" aria-label="Close" (click)="to.value=''" style="float:initial">
         <span aria-hidden="true">&times;</span>
       </button>
-      <button class="edit-time-button" (click)="applyFilter(from.value, to.value)">Filter</button>
+      <button class="edit-time-button" (click)="applyFilter(from.value, to.value)">
+          <span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
+      </button>
       <span class="span-timer-desc" style="margin-right: 20px;">{{totalTime()}}</span>
   </div>
   <div class="row intervals-container">

@@ -23,7 +23,6 @@ export class WorkEditItemComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    var resutltStr: string = "";
     if (changes.filterFrom) {
       this.filterFrom = changes.filterFrom.currentValue;
     }
@@ -34,6 +33,17 @@ export class WorkEditItemComponent implements OnInit, OnChanges {
 
   deleteWI(i: number) {
     this.onDeleteWorkingInterval.emit(i);
+  }
+
+  formatted(date) {
+    var d = moment(date);
+    
+    if (d.toDate().getTime()) {
+      return d.format(this.format);
+    }
+    else {
+      return '';
+    }
   }
 
   applyFilter(from: string, to: string) {
@@ -61,8 +71,10 @@ export class WorkEditItemComponent implements OnInit, OnChanges {
 
     for (var i = 0; i < workTime.length; i++) {
       if (workTime[i].end != null
-        && (this.filterFrom && (workTime[i].start >= this.filterFrom))
-        && (this.filterTo && (workTime[i].end <= this.filterTo))) {
+          && ((this.filterFrom && (workTime[i].start >= this.filterFrom))
+              || (this.filterFrom == null))
+          && ((this.filterTo && (workTime[i].end <= this.filterTo))
+              || (this.filterTo == null))) {
         total += Math.abs(workTime[i].end.getTime() - workTime[i].start.getTime());
       }
     }

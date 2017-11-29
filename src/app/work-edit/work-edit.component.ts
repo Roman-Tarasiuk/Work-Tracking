@@ -12,8 +12,8 @@ export class WorkEditComponent implements OnInit {
   @Output() onClose: EventEmitter<{}> = new EventEmitter();
   @Input() taskManager: TaskManager;
 
-  commonFilterFrom: Date;
-  commonFilterTo: Date;
+  overallFilterFrom: Date = null;
+  overallFilterTo: Date = null;
 
   format: string = "DD.MM.YYYY HH:mm:ss";
 
@@ -27,17 +27,17 @@ export class WorkEditComponent implements OnInit {
     var e = moment(to, this.format).toDate();
 
     if (s.getTime()) {
-      this.commonFilterFrom = s;
+      this.overallFilterFrom = s;
     }
     else {
-      this.commonFilterFrom = null;
+      this.overallFilterFrom = null;
     }
 
     if (e.getTime()) {
-      this.commonFilterTo = e;
+      this.overallFilterTo = e;
     }
     else {
-      this.commonFilterTo = null;
+      this.overallFilterTo = null;
     }
     
     //console.log('Applying common filter: from: ' + this.commonFilterFrom + ', to: ' + this.commonFilterTo);

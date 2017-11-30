@@ -76,6 +76,6 @@ export class WorkingIntervalComponent implements OnInit {
   unsetActive() {
     setTimeout(() => {
       this.isActive = false;
-    }, 500);
+    }, 200);
   }
 }

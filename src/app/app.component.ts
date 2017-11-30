@@ -43,7 +43,7 @@ export class AppComponent {
 
     if (this.taskManager.startTask(id)) {
       this.startTimer();
-      document.title = '\u25B6 ' + this.taskManager.runningTask.title + ' - ' + this.windowTitle;
+      document.title = '\u25B6 00:00 ** ' + this.taskManager.runningTask.title + ' - ' + this.windowTitle;
     }
   }
 

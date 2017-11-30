@@ -1,11 +1,11 @@
 <div class="row edit-work">
-  <div class="row">
+  <div class="row alert-success">
     <div class="col-sm-2"><b>{{task.id}}</b></div>
     <div class="col-sm-10">
       <span class="edit-work-title">{{task.title}}</span>
     </div>
   </div>
-  <div class="row filter">
+  <div class="row filter alert-success">
       <span style="margin-left: 20px;">From:</span>
       <input class="edit-time-filter" #from value="{{formatted(filterFrom)}}">
       <button type="button" class="close" aria-label="Close" (click)="from.value=''" style="float:initial">

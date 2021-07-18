@@ -4,6 +4,7 @@ import { WorkingInterval } from '../working-interval.model';
 import { TimeLib } from '../time.library';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -21,11 +22,20 @@ export class AppComponent {
   intervalTimerId: number;
   intervalAutosaveId: number;
   intervalTimer: number = 1000;
-  autoSaveInterval: number = 1000 * 60 * 2.5;
+  autoSaveInterval: number = 1000 * 60 * 3;
   startTime: Date;
 
   constructor() {
     this.taskManager = new TaskManager();
+  }
+
+  // Prevent closing tab when data is not saved.
+  @HostListener('window:beforeunload', ['$event'])
+  onWindowClose(event: any): void {
+    if (!this.taskManager.isDataSaved()) {
+      event.preventDefault();
+      event.returnValue = false;
+    }
   }
 
   addTask(id, title, priority, f) {
@@ -34,7 +44,7 @@ export class AppComponent {
     this.toggleNewTaskEditing();
   }
 
-  startTask(id) {
+  onStartTask(id) {
     if (this.taskManager.runningTask) {
       this.stopTimer();
       this.taskManager.stopRunningTask(new Date());
@@ -47,7 +57,7 @@ export class AppComponent {
     }
   }
 
-  stopTask() {
+  onStopTask() {
     this.taskManager.stopRunningTask(null);
     this.stopTimer();
 
@@ -97,7 +107,16 @@ export class AppComponent {
     window.clearInterval(this.intervalTimerId);
     window.clearInterval(this.intervalAutosaveId);
 
+    this.saveWork();
+
     this.timer = '';
   }
 
+  exportToFile() {
+    this.taskManager.saveDataToFile();
+  }
+
+  async importFromFile(event) {
+    this.taskManager.importFromFile(event);
+  }
 }

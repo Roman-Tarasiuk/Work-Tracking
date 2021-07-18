@@ -11,12 +11,12 @@ export class TaskItemComponent implements OnInit {
   @Input() task: Task;
   @Input() timer: string;
 
-  @Output() onTaskStarted: EventEmitter<string> = new EventEmitter();
-  @Output() onTaskStopped: EventEmitter<string> = new EventEmitter();
-  @Output() onTaskMovedUp: EventEmitter<string> = new EventEmitter();
-  @Output() onTaskMovedDown: EventEmitter<string> = new EventEmitter();
-  @Output() onTaskEdit: EventEmitter<string> = new EventEmitter();
-  @Output() onTaskDelete: EventEmitter<string> = new EventEmitter();
+  @Output() taskStart: EventEmitter<string> = new EventEmitter();
+  @Output() taskStop: EventEmitter<string> = new EventEmitter();
+  @Output() taskMoveUp: EventEmitter<string> = new EventEmitter();
+  @Output() taskMoveDown: EventEmitter<string> = new EventEmitter();
+  @Output() taskEdit: EventEmitter<string> = new EventEmitter();
+  @Output() taskDelete: EventEmitter<string> = new EventEmitter();
 
   isActive: boolean = false;
 
@@ -28,11 +28,12 @@ export class TaskItemComponent implements OnInit {
 
   toggle(event) {
       if (!this.task.started) {
-        this.onTaskStarted.emit(this.task.id);
+        // this.isActive = true;
+        this.taskStart.emit(this.task.id);
       }
       else {
         this.isActive = false;
-        this.onTaskStopped.emit(this.task.id);
+        this.taskStop.emit(this.task.id);
       }
       event.stopPropagation();
   }
@@ -42,22 +43,22 @@ export class TaskItemComponent implements OnInit {
   }
 
   moveUp(event) {
-    this.onTaskMovedUp.emit(this.task.id);
+    this.taskMoveUp.emit(this.task.id);
     event.stopPropagation();
   }
 
   moveDown(event) {
-    this.onTaskMovedDown.emit(this.task.id);
+    this.taskMoveDown.emit(this.task.id);
     event.stopPropagation();
   }
 
   edit (event) {
-      this.onTaskEdit.emit(this.task.id);
+      this.taskEdit.emit(this.task.id);
       event.stopPropagation();
   }
 
   delete (event) {
-      this.onTaskDelete.emit(this.task.id);
+      this.taskDelete.emit(this.task.id);
       event.stopPropagation();
   }
 

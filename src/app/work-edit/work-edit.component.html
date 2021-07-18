@@ -40,7 +40,7 @@
     </div>
   </div>
   <app-work-edit-item *ngFor="let t of taskManager.tasks"
-    (onDeleteWorkingInterval)="delete(t, $event)"
+    (deleteWI)="onDeleteWI(t, $event)"
     [filterFrom]="overallFilterFrom"
     [filterTo]="overallFilterTo"
     [task]="t">

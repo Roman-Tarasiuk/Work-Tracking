@@ -12,12 +12,12 @@ export class TasksListComponent implements OnInit {
   @Input() tasks: Task[];
   @Input() timer: string;
 
-  @Output() onTaskStarted: EventEmitter<string> = new EventEmitter();
-  @Output() onTaskStopped: EventEmitter<string> = new EventEmitter();
-  @Output() onTaskMovedUp: EventEmitter<string> = new EventEmitter();
-  @Output() onTaskMovedDown: EventEmitter<string> = new EventEmitter();
-  @Output() onTaskEdit: EventEmitter<string> = new EventEmitter();
-  @Output() onTaskDelete: EventEmitter<string> = new EventEmitter();
+  @Output() taskStart: EventEmitter<string> = new EventEmitter();
+  @Output() taskStop: EventEmitter<string> = new EventEmitter();
+  @Output() taskMoveUp: EventEmitter<string> = new EventEmitter();
+  @Output() taskMoveDown: EventEmitter<string> = new EventEmitter();
+  @Output() taskEdit: EventEmitter<string> = new EventEmitter();
+  @Output() taskDelete: EventEmitter<string> = new EventEmitter();
 
   constructor() {
   }
@@ -32,27 +32,27 @@ export class TasksListComponent implements OnInit {
   ngOnInit() {
   }
 
-  taskStarted(id) {
-    this.onTaskStarted.emit(id);
+  onTaskStarted(id) {
+    this.taskStart.emit(id);
   }
 
-  taskStopped(id) {
-    this.onTaskStopped.emit(id);
+  onTaskStopped(id) {
+    this.taskStop.emit(id);
   }
 
-  moveUp(id) {
-    this.onTaskMovedUp.emit(id);
+  onMoveUp(id) {
+    this.taskMoveUp.emit(id);
   }
 
-  moveDown(id) {
-    this.onTaskMovedDown.emit(id);
+  onMoveDown(id) {
+    this.taskMoveDown.emit(id);
   }
 
-  edit (id) {
-      this.onTaskEdit.emit(id);
+  onEdit (id) {
+      this.taskEdit.emit(id);
   }
 
-  delete (id) {
-      this.onTaskDelete.emit(id);
+  onDelete (id) {
+      this.taskDelete.emit(id);
   }
 }

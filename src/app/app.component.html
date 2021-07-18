@@ -1,39 +1,53 @@
 <div class="container">
   <h1>Work Tracking <span class="badge">Helper tool for Jira ®</span></h1>
 
-  <div class="alert alert-warning" style="margin-top: 5px;" role="alert" *ngIf="taskManager.runningTask == null">
-      <span class="h4">All tasks stopped!</span>
+  <div class="alert alert-info" style="margin-top: 5px;" role="alert"
+      *ngIf="taskManager.runningTask == null || !taskManager.isDataSaved()">
+    <span *ngIf="taskManager.runningTask == null" class="h4">All tasks stopped.</span>
+    <span *ngIf="taskManager.runningTask != null"class="h4">Task <b>{{taskManager.runningTask.id}}</b> is running now.</span>
+    <span *ngIf="!taskManager.isDataSaved()" class="h4 text-danger">Data is not saved to file!</span>
   </div>
-  <div class="alert alert-success" style="margin-top: 5px;" role="alert" *ngIf="taskManager.runningTask != null">
-      <span class="h4">Task <b>{{taskManager.runningTask.id}}</b> is running now.</span>
+  <div class="alert alert-warning" style="margin-top: 5px;" role="alert"
+      *ngIf="taskManager.loadedFromFile">
+    <span class="h4">To use imported from File: 1. Save to Local Storage, 2. Load from Local Storage.</span>
   </div>
 
   <app-tasks-list [tasks]="taskManager.tasks"
       [timer]="timer"
-      (onTaskStarted)="startTask($event)"
-      (onTaskStopped)="stopTask()"
-      (onTaskMovedUp)="taskManager.moveUp($event)"
-      (onTaskMovedDown)="taskManager.moveDown($event)"
-      (onTaskEdit)="taskManager.edit($event)"
-      (onTaskDelete)="taskManager.delete($event)">
+      (taskStart)="onStartTask($event)"
+      (taskStop)="onStopTask()"
+      (taskMoveUp)="taskManager.moveUp($event)"
+      (taskMoveDown)="taskManager.moveDown($event)"
+      (taskEdit)="taskManager.edit($event)"
+      (taskDelete)="taskManager.delete($event)">
   </app-tasks-list>
 
-  <div class="toolbar">
+  <div class="toolbar" [ngClass]="{'edit-new-task': newTaskEditing}">
     <button class="btn btn-success"
-      [ngClass]="{'edit-new-task': newTaskEditing}"
       (click)="toggleNewTaskEditing()">New Task</button>
 
     <button class="btn btn-primary"
-      [ngClass]="{'edit-new-task': newTaskEditing}"
-      (click)="saveWork()">Save Work</button>
+      (click)="saveWork()">Save to Local Storage</button>
 
     <button class="btn btn-warning"
-      [ngClass]="{'edit-new-task': newTaskEditing}"
-      (click)="taskManager.loadData()">Load Work</button>
+      (click)="taskManager.loadData()">Load from Local Storage</button>
 
     <button class="btn btn-warning"
-      [ngClass]="{'edit-new-task': newTaskEditing}"
       (click)="toggleWorkEditing()">Edit Work</button>
+
+    <button class="btn btn-warning"
+      (click)="exportToFile()">Export to File</button>
+
+    <label class="btn btn-warning">
+      Import from File
+      <input type="file"
+          accept="text/plain"
+          (change)="importFromFile($event)"
+          style="display: none">
+    </label>
+
+    <!-- <button class="btn btn-warning"
+      (click)="this.taskManager.toggleSaved()">Data {{this.taskManager.isDataSaved() ? '' : 'IS NOT'}} saved</button> -->
   </div>
 
   <form #f="ngForm" class="new-task-form" [ngClass]="{'edit-new-task': !newTaskEditing}">
@@ -59,11 +73,15 @@
       <button class="btn btn-success" (click)="toggleNewTaskEditing()">Cancel</button>
   </form>
 
-  <div class="alert alert-warning" style="margin-top: 15px;" role="alert" *ngIf="taskManager.runningTask == null">
-    <span class="h4">All tasks stopped!</span>
+  <div class="alert alert-info" style="margin-top: 5px;" role="alert"
+      *ngIf="taskManager.runningTask == null || !taskManager.isDataSaved()">
+    <span *ngIf="taskManager.runningTask == null" class="h4">All tasks stopped.</span>
+    <span *ngIf="taskManager.runningTask != null"class="h4">Task <b>{{taskManager.runningTask.id}}</b> is running now.</span>
+    <span *ngIf="!taskManager.isDataSaved()" class="h4 text-danger">Data is not saved to file!</span>
   </div>
-  <div class="alert alert-success" style="margin-top: 15px;" role="alert" *ngIf="taskManager.runningTask != null">
-    <span class="h4">Task <b>{{taskManager.runningTask.id}}</b> is running now.</span>
+  <div class="alert alert-warning" style="margin-top: 5px;" role="alert"
+      *ngIf="taskManager.loadedFromFile">
+    <span class="h4">To use imported from File: 1. Save to Local Storage, 2. Load from Local Storage.</span>
   </div>
 
   <app-work-edit *ngIf="workEditing"

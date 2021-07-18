@@ -13,7 +13,7 @@ export class WorkingIntervalComponent implements OnInit {
   @Input() filterFrom: Date;
   @Input() filterTo: Date;
 
-  @Output() onDelete: EventEmitter<{}> = new EventEmitter();
+  @Output() deleteWI: EventEmitter<{}> = new EventEmitter();
 
   isActive: boolean = false;
 
@@ -52,8 +52,8 @@ export class WorkingIntervalComponent implements OnInit {
     return m.format(this.format);
   }
 
-  delete() {
-    this.onDelete.emit();
+  onDelete() {
+    this.deleteWI.emit();
   }
 
   matchesFilter() {

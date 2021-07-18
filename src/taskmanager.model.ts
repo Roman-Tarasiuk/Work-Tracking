@@ -4,13 +4,19 @@ import * as moment from 'moment';
 export class TaskManager {
   tasks: Task[];
   runningTask: Task = null;
-
+  private isSaved = true;
+  loadedFromFile: boolean = false;
+  
   private format: string = "DD.MM.YYYY HH:mm:ss";
 
   constructor() {
     this.tasks = [
       new Task(4, 'id-0', 'Idle Time')
     ]
+  }
+
+  isDataSaved() {
+    return this.isSaved;
   }
 
   startTask(taskId) {
@@ -24,6 +30,8 @@ export class TaskManager {
         }
         this.runningTask = this.tasks[i];
         this.runningTask.startWork(t);
+
+        this.isSaved = false;
 
         return true;
       }
@@ -86,7 +94,7 @@ export class TaskManager {
     }
   }
 
-  deleteWork(taskId, i) {
+  deleteWorkItem(taskId, i) {
     var index = this.findTaskIndex(taskId);
 
     if ((index >= 0) && (index < this.tasks.length)) {
@@ -209,11 +217,52 @@ export class TaskManager {
         result.push(new Task(tmp[i].priority, tmp[i].id, tmp[i].title, tmp[i].workTime));
       }
 
+      this.loadedFromFile = false;
+
       return result;
   }
 
   dateTrim(date: Date) {
     var m = moment(date);
     return moment(m.format(this.format), this.format).toDate();
+  }
+
+  saveDataToFile() {
+    let a = document.createElement('a');
+    a.href = 'data:application/octet-stream,' + JSON.stringify(this.tasks);
+    a.download = 'abc.txt';
+    a.click();
+    
+    this.isSaved = true;
+  }
+
+  async importFromFile(event) {
+    var work = await this.openFile(event) as string;
+    this.tasks = JSON.parse(work);
+    this.loadedFromFile = true;
+  }
+
+  async openFile(event) {
+    var that = this;
+    var file = event.target.files[0];
+
+    // https://stackoverflow.com/questions/51026420/filereader-readastext-async-issues
+    return new Promise((resolve, reject) => {
+      let content = '';
+      const reader = new FileReader();
+
+      // Wait till complete
+      reader.onloadend = function(e: any) {
+        content = e.target.result;
+        resolve(content);
+      };
+
+      // Make sure to handle error states
+      reader.onerror = function(e: any) {
+        reject(e);
+      };
+
+      reader.readAsText(file);
+    });
   }
 }

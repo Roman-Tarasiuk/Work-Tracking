@@ -1,11 +1,11 @@
 <div *ngFor="let task of sordedByOrder()">
   <app-task-item [task]="task"
       [timer]="timer"
-      (onTaskStarted)="taskStarted($event)"
-      (onTaskStopped)="taskStopped($event)"
-      (onTaskMovedUp)="moveUp($event)"
-      (onTaskMovedDown)="moveDown($event)"
-      (onTaskEdit)="edit($event)"
-      (onTaskDelete)="delete($event)">
+      (taskStart)="onTaskStarted($event)"
+      (taskStop)="onTaskStopped($event)"
+      (taskMoveUp)="onMoveUp($event)"
+      (taskMoveDown)="onMoveDown($event)"
+      (taskEdit)="onEdit($event)"
+      (taskDelete)="onDelete($event)">
   </app-task-item>
 </div>

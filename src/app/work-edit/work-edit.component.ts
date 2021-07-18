@@ -43,8 +43,8 @@ export class WorkEditComponent implements OnInit {
     //console.log('Applying common filter: from: ' + this.commonFilterFrom + ', to: ' + this.commonFilterTo);
   }
 
-  delete(task: Task, i: number) {
-    this.taskManager.deleteWork(task.id, i);
+  onDeleteWI(task: Task, i: number) {
+    this.taskManager.deleteWorkItem(task.id, i);
   }
 
   close() {

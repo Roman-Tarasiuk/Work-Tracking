@@ -9,7 +9,7 @@ import * as moment from 'moment';
   styleUrls: ['./work-edit-item.component.css']
 })
 export class WorkEditItemComponent implements OnInit, OnChanges {
-  @Output() onDeleteWorkingInterval: EventEmitter<number> = new EventEmitter();
+  @Output() deleteWI: EventEmitter<number> = new EventEmitter();
   @Input() task: Task;
 
   @Input() filterFrom: Date;
@@ -31,8 +31,8 @@ export class WorkEditItemComponent implements OnInit, OnChanges {
     }
    }
 
-  deleteWI(i: number) {
-    this.onDeleteWorkingInterval.emit(i);
+  onDeleteWI(i: number) {
+    this.deleteWI.emit(i);
   }
 
   formatted(date) {

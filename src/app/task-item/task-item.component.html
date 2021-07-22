@@ -1,6 +1,6 @@
 <div class="task-item"
     [ngClass]="{'task-item-active': isActive, 'task-item-running': task.started}"
-    (click)="toggleActive()">
+    (click)="toggleActive($event)">
   <div class="row">
     <div class="col-sm-9">
       <h2>{{task.title}}</h2>
@@ -12,7 +12,7 @@
           <button *ngIf="isActive || task.started" (click)="delete($event)" class="btn btn-xs vertical-align1 btn-danger">Delete</button>
         </div>
         <div class="col-sm-6 buttons-right">
-          <button (click)='toggle($event)'
+          <button (click)='toggleStartStop($event)'
               class="btn btn-primary vertical-align1"
               [ngClass]="{'btn-warning': task.started, 'btn-success': !task.started}">
               {{task.started ? 'Stop' : 'Start'}}

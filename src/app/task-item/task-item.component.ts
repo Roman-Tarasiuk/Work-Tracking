@@ -26,20 +26,22 @@ export class TaskItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  toggle(event) {
-      if (!this.task.started) {
-        // this.isActive = true;
-        this.taskStart.emit(this.task.id);
+  toggleStartStop(event) {
+      if (this.task.started) {
+        this.taskStop.emit(this.task.id);
+        this.isActive = true;
       }
       else {
+        this.taskStart.emit(this.task.id);
         this.isActive = false;
-        this.taskStop.emit(this.task.id);
       }
+
       event.stopPropagation();
   }
 
-  toggleActive() {
+  toggleActive(event) {
       this.isActive = !this.isActive;
+      event.stopPropagation();
   }
 
   moveUp(event) {

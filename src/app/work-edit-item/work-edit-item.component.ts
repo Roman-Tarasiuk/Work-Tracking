@@ -29,7 +29,7 @@ export class WorkEditItemComponent implements OnInit, OnChanges {
     if (changes.filterTo) {
       this.filterTo = changes.filterTo.currentValue;
     }
-   }
+  }
 
   onDeleteWI(i: number) {
     this.deleteWI.emit(i);

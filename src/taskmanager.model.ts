@@ -19,6 +19,16 @@ export class TaskManager {
     return this.isSaved;
   }
 
+  lastTaskStartTime(): Date {
+    if (this.runningTask != null) {
+      var lastStartLength = this.runningTask.workTime.length;
+      return this.runningTask.workTime[lastStartLength - 1].start;
+    }
+    else {
+      return null;
+    }
+  }
+
   startTask(taskId) {
     var t;
     for (var i = 0; i < this.tasks.length; i++) {

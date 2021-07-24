@@ -13,7 +13,7 @@
   </div>
 
   <app-tasks-list [tasks]="taskManager.tasks"
-      [timer]="timer"
+      [timer]="taskDurationStr"
       (taskStart)="onStartTask($event)"
       (taskStop)="onStopTask()"
       (taskMoveUp)="taskManager.moveUp($event)"

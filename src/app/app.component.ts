@@ -17,13 +17,12 @@ export class AppComponent {
   workEditing: boolean = false;
   windowTitle: string = 'Work Tracking';
 
-  timer: string;
+  taskDurationStr: string;
   timerEnabled: boolean = true;
   intervalTimerId: number;
   intervalAutosaveId: number;
-  intervalTimer: number = 1000;
+  timerInterval: number = 1000;
   autoSaveInterval: number = 1000 * 60 * 3;
-  startTime: Date;
 
   constructor() {
     this.taskManager = new TaskManager();
@@ -79,8 +78,6 @@ export class AppComponent {
   }
 
   startTimer() {
-    this.startTime = new Date();
-
     this.intervalAutosaveId = window.setInterval(() => {
       this.timerEnabled = false;
       this.saveWork();
@@ -91,16 +88,16 @@ export class AppComponent {
 
     function timer() {
         if (self.timerEnabled) {
-          var timeSpan = new Date().getTime() - self.startTime.getTime();
+          var timeSpan = new Date().getTime() - self.taskManager.lastTaskStartTime().getTime();
 
-          self.timer = TimeLib.timeStr(timeSpan);
+          self.taskDurationStr = TimeLib.timeStr(timeSpan);
           var timeTitle = TimeLib.timeStrDigitalClock(timeSpan);
 
           document.title = '\u25B6 ' + timeTitle + ' ** ' + self.taskManager.runningTask.title + ' - ' + self.windowTitle;
         }
     }
 
-    this.intervalTimerId = window.setInterval(timer, this.intervalTimer);
+    this.intervalTimerId = window.setInterval(timer, this.timerInterval);
   }
 
   stopTimer() {
@@ -109,7 +106,7 @@ export class AppComponent {
 
     this.saveWork();
 
-    this.timer = '';
+    this.taskDurationStr = '';
   }
 
   exportToFile() {
